@@ -1,0 +1,27 @@
+# NM_HACKREPO — ce nu intra NICIODATA intr-un depozit public
+*.env
+!.env.example
+*.key
+*.pem
+*.p12
+*.jks
+*keystore*
+creds*
+secrets*
+config.php
+*.tar.gz
+*.tgz
+*.zip
+*.sql
+*.sqlite
+*.db
+*.log
+*.bak
+*.copie.*
+.respins_*
+.inainte_*
+.nm_*
+node_modules/
+__pycache__/
+*.pyc
+.DS_Store
