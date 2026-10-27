@@ -15,7 +15,7 @@ into concrete network actions, and refuses on its own to touch what must stay al
 - [x] `schema/plan.schema.json` — the strict shape every plan must have
 - [x] `src/validator.php` — the brake: the never-touch list is enforced **in code**,
       not asked for in the prompt. A plan naming a protected target is rejected whole.
-- [ ] `src/collector.php` — reads the live inverter state
+- [x] `src/collector.php` — reads the live inverter state
 - [ ] `src/compiler.php` — policy in English + state → an argued plan, via an
       **open-weight model running on our own hardware**
 - [ ] `src/executor.php` — applies the approved plan through the RouterOS API
