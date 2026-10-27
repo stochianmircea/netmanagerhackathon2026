@@ -228,7 +228,7 @@ function validate_plan(array $plan, array $state, int $policy_lines = 0): array
                 if ($op === 'enable' && $w > 0) {
                     $out[] = reject('ARITHMETIC', $where, "enabling '$target' cannot save $w W");
                 }
-                $declarat = (is_array($pot) && isset($pot[$op])) ? (int)$pot[$op] : null;
+                $declarat = op_worth($dev, $op);
                 if ($declarat !== null) {
                     if ($w > (int)ceil($declarat * 1.05) + 2) {
                         $out[] = reject('ARITHMETIC', $where, "claims $w W from '$op' on '$target', "
@@ -246,6 +246,30 @@ function validate_plan(array $plan, array $state, int $policy_lines = 0): array
     }
 
     return done($out, $plan['actions']);
+}
+
+
+/**
+ * What the owner measured one operation on one device to be worth, in watts, or null if they
+ * never declared that operation.
+ *
+ * Two shapes are allowed in the site file, because they arrived in that order and old files must
+ * keep working:
+ *
+ *     "disable": 120                                  — worth declared, no way to perform it
+ *     "disable": { "saves_w": 120, "apply": { .. } }  — worth declared, and the request to send
+ *
+ * The second shape is what the executor needs (Day 5). Writing a bare number stays legal and
+ * means "this is worth 120 W, but nothing may send it" — a device you can reason about and not
+ * act on, which is a perfectly sensible thing for an owner to want.
+ */
+function op_worth(array $dev, string $op): ?int
+{
+    $ops = $dev['operations'] ?? null;
+    if (!is_array($ops) || !array_key_exists($op, $ops)) return null;
+    $v = $ops[$op];
+    if (is_array($v)) return array_key_exists('saves_w', $v) ? (int)$v['saves_w'] : null;
+    return (int)$v;
 }
 
 

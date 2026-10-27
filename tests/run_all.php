@@ -8,7 +8,7 @@
  * anonymised fixture, so a judge can reproduce all of it on a laptop.
  */
 declare(strict_types=1);
-$suites = ['validator_test.php', 'collector_test.php', 'compiler_test.php'];
+$suites = ['validator_test.php', 'collector_test.php', 'compiler_test.php', 'executor_test.php'];
 $fail = 0;
 foreach ($suites as $s) {
     $out = []; $rc = 0;

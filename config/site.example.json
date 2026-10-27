@@ -10,17 +10,44 @@
     "3": "inverter-second"
   },
 
-  "operations_note": "Each device declares which operations are possible on it and what each one is worth in watts, measured by the owner — not guessed by the model. A model that claims throttling an access point saves its whole 95 W is making up a number; here it cannot, because the owner wrote down that throttling that AP is worth 8 W. src/validator.php rejects any action whose operation is not declared for that device, or whose claimed saving exceeds what was declared.",
+  "operations_note": "Each device declares which operations are possible on it and what each one is worth in watts, measured by the owner — not guessed by the model. A model that claims throttling an access point saves its whole 95 W is making up a number; here it cannot, because the owner wrote down that throttling that AP is worth 6 W. src/validator.php rejects any action whose operation is not declared for that device, or whose claimed saving exceeds what was declared.",
+
+  "apply_note": "An operation may also carry an `apply` block: the exact request the executor is permitted to send for it. That block is the agent's entire reach. src/executor.php has no generic 'do something to a device' path — an operation with no `apply` can be reasoned about and proposed, but it cannot be carried out, and the executor refuses it by name. Only {{argument}} and {{target}} are interpolated. Credentials are never written here: `user_env` and `pass_env` name environment variables, and the journal redacts anything that looks like a secret anyway. `media-server.set_power_profile` below deliberately has a measured worth and no `apply` — the owner has not written that command down yet, so the agent may suggest it and may not do it.",
 
   "inventory": [
     { "id": "guest-wifi",       "kind": "wifi_ssid", "label": "Guest Wi-Fi",             "measured_w": 120, "rated_w": 150, "protected": false,
-      "operations": { "disable": 120, "limit_bandwidth": 8 } },
+      "operations": {
+        "disable":         { "saves_w": 120,
+                             "apply": { "method": "POST", "url": "https://10.0.0.1/rest/interface/wireless/set",
+                                        "body": { "numbers": "guest-wifi", "disabled": "yes" },
+                                        "user_env": "ROUTEROS_USER", "pass_env": "ROUTEROS_PASSWORD" } },
+        "limit_bandwidth": { "saves_w": 8,
+                             "apply": { "method": "POST", "url": "https://10.0.0.1/rest/queue/simple/set",
+                                        "body": { "numbers": "guest-wifi", "max-limit": "{{argument}}k/{{argument}}k" },
+                                        "user_env": "ROUTEROS_USER", "pass_env": "ROUTEROS_PASSWORD" } } } },
+
     { "id": "office-wifi",      "kind": "wifi_ssid", "label": "Office Wi-Fi",            "measured_w": 95,  "rated_w": 120, "protected": false,
-      "operations": { "limit_bandwidth": 6 } },
+      "operations": {
+        "limit_bandwidth": { "saves_w": 6,
+                             "apply": { "method": "POST", "url": "https://10.0.0.1/rest/queue/simple/set",
+                                        "body": { "numbers": "office-wifi", "max-limit": "{{argument}}k/{{argument}}k" },
+                                        "user_env": "ROUTEROS_USER", "pass_env": "ROUTEROS_PASSWORD" } } } },
+
     { "id": "media-server",     "kind": "host",      "label": "Media server",            "measured_w": 180, "rated_w": 250, "protected": false,
-      "operations": { "disable": 180, "set_power_profile": 55 } },
+      "operations": {
+        "disable":           { "saves_w": 180,
+                               "apply": { "method": "POST", "url": "https://10.0.0.1/rest/interface/ethernet/poe/set",
+                                          "body": { "numbers": "ether7", "poe-out": "off" },
+                                          "user_env": "ROUTEROS_USER", "pass_env": "ROUTEROS_PASSWORD" } },
+        "set_power_profile": { "saves_w": 55 } } },
+
     { "id": "lab-switch",       "kind": "switch",    "label": "Lab switch (8 port PoE)", "measured_w": 210, "rated_w": 370, "protected": false,
-      "operations": { "disable": 210 } },
+      "operations": {
+        "disable":         { "saves_w": 210,
+                             "apply": { "method": "POST", "url": "https://10.0.0.1/rest/interface/ethernet/poe/set",
+                                        "body": { "numbers": "ether5", "poe-out": "off" },
+                                        "user_env": "ROUTEROS_USER", "pass_env": "ROUTEROS_PASSWORD" } } } },
+
     { "id": "gate-camera",      "kind": "camera",    "label": "Gate camera",             "measured_w": 9,   "rated_w": 12,  "protected": true,
       "operations": {} },
     { "id": "gate-controller",  "kind": "iot",       "label": "Gate controller",         "measured_w": 4,   "rated_w": 8,   "protected": true,

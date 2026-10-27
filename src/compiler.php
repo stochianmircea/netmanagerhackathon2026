@@ -70,7 +70,10 @@ function render_inventory(array $inventory, array $protected): string
             $what = '[NEVER TOUCH]';
         } elseif (is_array($ops)) {
             $bits = [];
-            foreach ($ops as $k => $v) $bits[] = $k . ' saves ' . (int)$v . ' W';
+            foreach ($ops as $k => $v) {
+                $saves = op_worth($d, $k);
+                $bits[] = $k . ($saves === null ? '' : ' saves ' . $saves . ' W');
+            }
             $what = $bits ? implode(', ', $bits) : 'nothing may be done to it';
         } else {
             $what = 'operations not declared';

@@ -1,0 +1,4 @@
+# The journal is a record of this installation, not of the project.
+# It stays on the machine that made it, and never in the repository.
+*
+!.gitignore
