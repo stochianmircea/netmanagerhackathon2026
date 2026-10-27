@@ -89,7 +89,7 @@ $cases = [
 
     ['limit_bandwidth with a number is fine',
      good_plan([], [act(['operation' => 'limit_bandwidth', 'argument' => 2048,
-                         'expected_saving_w' => 40])]), true, null],
+                         'expected_saving_w' => 8])]), true, null],
 
     ['a power profile outside the list is refused',
      good_plan([], [act(['operation' => 'set_power_profile', 'argument' => 'turbo',
@@ -134,6 +134,35 @@ $cases = [
     // ── one device, one decision ────────────────────────────────────────────────────────
     ['acting twice on the same device is refused',
      good_plan([], [act(), act(['operation' => 'enable', 'expected_saving_w' => 0])]), false, 'CONFLICT'],
+
+    // ── what the owner says can be done, and what it is worth ───────────────────────────
+    // Added 27.10 after the first real run against a local model. It proposed throttling an
+    // access point and claimed the whole 95 W the device draws. It passed: the old rule only
+    // refused a saving LARGER than the draw, so "this saves 100% of the device" slipped
+    // through. Now the owner declares each operation and its measured worth.
+    ['an operation the owner did not declare for that device is refused',
+     good_plan([], [act(['target' => 'office-wifi', 'operation' => 'disable',
+                         'expected_saving_w' => 95])]), false, 'CAPABILITY'],
+
+    ['a declared operation with the declared saving is accepted',
+     good_plan([], [act(['target' => 'office-wifi', 'operation' => 'limit_bandwidth',
+                         'argument' => 2048, 'expected_saving_w' => 6])]), true, null],
+
+    ['throttling cannot claim the whole draw of the device',
+     good_plan([], [act(['target' => 'office-wifi', 'operation' => 'limit_bandwidth',
+                         'argument' => 2048, 'expected_saving_w' => 95])]), false, 'ARITHMETIC'],
+
+    ['a device whose owner declared no operations at all is untouchable',
+     good_plan([], [act(['target' => 'gate-camera', 'operation' => 'disable',
+                         'expected_saving_w' => 9])]), false, 'CAPABILITY'],
+
+    ['a device with no operations block still falls back to its measured draw',
+     good_plan([], [act(['target' => 'old-printer', 'operation' => 'disable',
+                         'expected_saving_w' => 30])]), true, null],
+
+    ['and that fallback still refuses an impossible figure',
+     good_plan([], [act(['target' => 'old-printer', 'operation' => 'disable',
+                         'expected_saving_w' => 900])]), false, 'ARITHMETIC'],
 ];
 
 $fail = 0; $n = 0;

@@ -64,9 +64,19 @@ function render_inventory(array $inventory, array $protected): string
     foreach ($inventory as $d) {
         $id = (string)($d['id'] ?? '');
         $w  = $d['measured_w'] ?? $d['rated_w'] ?? null;
-        $out[] = sprintf('  %-18s %-28s %s%s', $id, (string)($d['label'] ?? ''),
-            $w === null ? 'draw unknown' : ($w . ' W'),
-            (in_array($id, $protected, true) || !empty($d['protected'])) ? '   [NEVER TOUCH]' : '');
+        $prot = in_array($id, $protected, true) || !empty($d['protected']);
+        $ops = $d['operations'] ?? null;
+        if ($prot) {
+            $what = '[NEVER TOUCH]';
+        } elseif (is_array($ops)) {
+            $bits = [];
+            foreach ($ops as $k => $v) $bits[] = $k . ' saves ' . (int)$v . ' W';
+            $what = $bits ? implode(', ', $bits) : 'nothing may be done to it';
+        } else {
+            $what = 'operations not declared';
+        }
+        $out[] = sprintf('  %-18s %-28s %-12s %s', $id, (string)($d['label'] ?? ''),
+            $w === null ? 'draw ?' : ($w . ' W'), $what);
     }
     return implode("\n", $out);
 }
@@ -85,7 +95,9 @@ function build_prompt(array $state, array $policy, ?array $rejections = null, ?a
         . "These are the only facts that exist. You may cite a fact only by the id on the left.\n"
         . render_facts($state['facts']) . "\n";
 
-    $p .= "\nDEVICES (the only targets that exist)\n"
+    $p .= "\nDEVICES — the only targets that exist, and the only operations allowed on each.\n"
+        . "The watts beside an operation are what the OWNER measured it to be worth. Do not\n"
+        . "claim more than that, and do not use an operation that is not listed for a device.\n"
         . render_inventory($state['inventory'] ?? [], $state['protected'] ?? []) . "\n";
 
     $p .= "\nRULES\n"
@@ -143,7 +155,12 @@ function ask_ollama(string $prompt, array $opt): string
     $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
     if ($raw === false) throw new RuntimeException('model unreachable: ' . $err);
-    if ($code !== 200)  throw new RuntimeException('model returned HTTP ' . $code . ': ' . substr((string)$raw, 0, 200));
+    if ($code !== 200) {
+        $hint = '';
+        if ($code === 404) $hint = "  (model name is case sensitive in Ollama — check `ollama list`)";
+        throw new RuntimeException('model ' . $model . ' returned HTTP ' . $code . ': '
+            . trim(substr((string)$raw, 0, 200)) . $hint);
+    }
     $j = json_decode((string)$raw, true);
     if (!isset($j['response'])) throw new RuntimeException('model gave no response field');
     return (string)$j['response'];
@@ -195,6 +212,12 @@ function compile_plan(array $state, array $policy, array $opt = [], ?callable $a
     for ($round = 1; $round <= COMPILER_MAX_ROUNDS; $round++) {
         $prompt = build_prompt($state, $policy, $round > 1 ? $rejections : null, $round > 1 ? $plan : null);
         $t0 = microtime(true);
+        if (!empty($opt['verbose'])) {
+            fwrite(STDERR, '  round ' . $round . ' · asking '
+                . (string)($opt['model'] ?? getenv('LOCAL_MODEL_NAME') ?: 'llama3.1:8b')
+                . ' at ' . (string)($opt['url'] ?? getenv('LOCAL_MODEL_URL') ?: 'http://127.0.0.1:11434')
+                . " …\n");
+        }
         try {
             $raw = $ask($prompt, $opt);
         } catch (Throwable $e) {
@@ -240,6 +263,7 @@ if (PHP_SAPI === 'cli' && isset($argv) && realpath($argv[0]) === realpath(__FILE
     $policy = policy_lines((string)($opt['policy'] ?? 'policy/example-policy.md'));
     if (!$policy) { fwrite(STDERR, "the policy has no lines to compile\n"); exit(2); }
 
+    $opt['verbose'] = !isset($opt['json']);
     $r = compile_plan($state, $policy, $opt);
 
     if (isset($opt['json'])) {
@@ -247,14 +271,24 @@ if (PHP_SAPI === 'cli' && isset($argv) && realpath($argv[0]) === realpath(__FILE
         exit($r['ok'] ? 0 : 1);
     }
 
+    $spus = 0;
     foreach ($r['rounds'] as $x) {
         echo '  round ' . $x['round']
             . (isset($x['seconds']) ? ' · ' . $x['seconds'] . 's' : '')
             . (isset($x['actions']) ? ' · ' . $x['actions'] . ' action(s)' : '')
             . ' · ' . (($x['ok'] ?? false) ? 'accepted' : 'rejected') . "\n";
+        /* Un round care a aruncat o exceptie n-are 'rejections' — si pana acum mesajul ei nu
+           ajungea nicaieri. Un program care esueaza fara sa spuna de ce e mai rau decat unul
+           care cade zgomotos. */
+        if (isset($x['error'])) { echo '      MODEL  ' . $x['error'] . "\n"; $spus++; }
         foreach (($x['rejections'] ?? []) as $rej) {
             echo '      ' . $rej['code'] . '  ' . ($rej['where'] ? $rej['where'] . ': ' : '') . $rej['why'] . "\n";
+            $spus++;
         }
+        if (isset($x['raw'])) echo '      the model said: ' . trim(preg_replace('/\s+/', ' ', $x['raw'])) . "\n";
+    }
+    if (!$spus) {
+        foreach ($r['rejections'] as $rej) echo '      ' . $rej['code'] . '  ' . $rej['why'] . "\n";
     }
     echo "\n";
     if (!$r['ok']) { echo "  REJECTED — nothing goes to a human for approval\n"; exit(1); }

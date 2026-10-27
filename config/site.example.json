@@ -10,15 +10,25 @@
     "3": "inverter-second"
   },
 
+  "operations_note": "Each device declares which operations are possible on it and what each one is worth in watts, measured by the owner — not guessed by the model. A model that claims throttling an access point saves its whole 95 W is making up a number; here it cannot, because the owner wrote down that throttling that AP is worth 8 W. src/validator.php rejects any action whose operation is not declared for that device, or whose claimed saving exceeds what was declared.",
+
   "inventory": [
-    { "id": "guest-wifi",       "kind": "wifi_ssid", "label": "Guest Wi-Fi",             "measured_w": 120, "rated_w": 150, "protected": false },
-    { "id": "office-wifi",      "kind": "wifi_ssid", "label": "Office Wi-Fi",            "measured_w": 95,  "rated_w": 120, "protected": false },
-    { "id": "media-server",     "kind": "host",      "label": "Media server",            "measured_w": 180, "rated_w": 250, "protected": false },
-    { "id": "lab-switch",       "kind": "switch",    "label": "Lab switch (8 port PoE)", "measured_w": 210, "rated_w": 370, "protected": false },
-    { "id": "gate-camera",      "kind": "camera",    "label": "Gate camera",             "measured_w": 9,   "rated_w": 12,  "protected": true },
-    { "id": "gate-controller",  "kind": "iot",       "label": "Gate controller",         "measured_w": 4,   "rated_w": 8,   "protected": true },
-    { "id": "core-switch",      "kind": "switch",    "label": "Core switch",             "measured_w": 65,  "rated_w": 90,  "protected": true },
-    { "id": "critical-station", "kind": "host",      "label": "Critical workstation",    "measured_w": 140, "rated_w": 300, "protected": true }
+    { "id": "guest-wifi",       "kind": "wifi_ssid", "label": "Guest Wi-Fi",             "measured_w": 120, "rated_w": 150, "protected": false,
+      "operations": { "disable": 120, "limit_bandwidth": 8 } },
+    { "id": "office-wifi",      "kind": "wifi_ssid", "label": "Office Wi-Fi",            "measured_w": 95,  "rated_w": 120, "protected": false,
+      "operations": { "limit_bandwidth": 6 } },
+    { "id": "media-server",     "kind": "host",      "label": "Media server",            "measured_w": 180, "rated_w": 250, "protected": false,
+      "operations": { "disable": 180, "set_power_profile": 55 } },
+    { "id": "lab-switch",       "kind": "switch",    "label": "Lab switch (8 port PoE)", "measured_w": 210, "rated_w": 370, "protected": false,
+      "operations": { "disable": 210 } },
+    { "id": "gate-camera",      "kind": "camera",    "label": "Gate camera",             "measured_w": 9,   "rated_w": 12,  "protected": true,
+      "operations": {} },
+    { "id": "gate-controller",  "kind": "iot",       "label": "Gate controller",         "measured_w": 4,   "rated_w": 8,   "protected": true,
+      "operations": {} },
+    { "id": "core-switch",      "kind": "switch",    "label": "Core switch",             "measured_w": 65,  "rated_w": 90,  "protected": true,
+      "operations": {} },
+    { "id": "critical-station", "kind": "host",      "label": "Critical workstation",    "measured_w": 140, "rated_w": 300, "protected": true,
+      "operations": {} }
   ],
 
   "protected": ["gate-camera", "gate-controller", "core-switch", "critical-station"]

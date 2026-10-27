@@ -197,7 +197,29 @@ function validate_plan(array $plan, array $state, int $policy_lines = 0): array
             }
         }
 
-        // 6. ARITHMETIC — a saving bigger than the device can draw is an invented number
+        // 6. CAPABILITY — the owner says what can be done to each device, not the model
+        //
+        // Measured 27.10, on the first real run against a local model: the plan proposed
+        // limiting the bandwidth of an access point and claimed it saved 95 W — the device's
+        // entire draw. Throttling an AP saves a few watts; the radio and the CPU run either way.
+        // The plan passed, because the old check only refused a saving LARGER than the device
+        // draws. "This action saves 100% of the device" is a made-up number that fits inside
+        // that rule, which is how a brake that looks strict lets a false claim through.
+        //
+        // So the owner now declares, per device, which operations exist on it and what each one
+        // is worth in watts. Those are measurements they made. The model picks among them and
+        // argues; it cannot invent either the operation or its value.
+        $pot = $dev['operations'] ?? null;
+        if (is_array($pot)) {
+            if (!array_key_exists($op, $pot)) {
+                $au = array_keys($pot);
+                $out[] = reject('CAPABILITY', $where, "'$op' is not declared for '$target'"
+                    . ($au ? ' (declared: ' . implode(', ', $au) . ')'
+                           : " — nothing may be done to this device"));
+            }
+        }
+
+        // 7. ARITHMETIC — a saving bigger than the owner measured is an invented number
         if (array_key_exists('expected_saving_w', $a)) {
             $w = $a['expected_saving_w'];
             if (!is_int($w) || $w < 0) {
@@ -206,10 +228,18 @@ function validate_plan(array $plan, array $state, int $policy_lines = 0): array
                 if ($op === 'enable' && $w > 0) {
                     $out[] = reject('ARITHMETIC', $where, "enabling '$target' cannot save $w W");
                 }
-                $can = $dev['measured_w'] ?? $dev['rated_w'] ?? null;
-                if ($can !== null && $w > (int)ceil((float)$can * 1.05) + 5) {
-                    $out[] = reject('ARITHMETIC', $where, "claims $w W saved, but '$target' draws "
-                        . $can . ' W — the figure cannot come from this device');
+                $declarat = (is_array($pot) && isset($pot[$op])) ? (int)$pot[$op] : null;
+                if ($declarat !== null) {
+                    if ($w > (int)ceil($declarat * 1.05) + 2) {
+                        $out[] = reject('ARITHMETIC', $where, "claims $w W from '$op' on '$target', "
+                            . "but the owner measured that operation as worth $declarat W");
+                    }
+                } else {
+                    $can = $dev['measured_w'] ?? $dev['rated_w'] ?? null;
+                    if ($can !== null && $w > (int)ceil((float)$can * 1.05) + 5) {
+                        $out[] = reject('ARITHMETIC', $where, "claims $w W saved, but '$target' draws "
+                            . $can . ' W — the figure cannot come from this device');
+                    }
                 }
             }
         }
