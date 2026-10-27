@@ -1,0 +1,29 @@
+{
+  "state_id": "s-20261027T0900Z",
+  "taken_at": "2026-10-27T11:00:00+02:00",
+  "site": "example-site",
+  "note": "Anonymised sample state so this repository can be run without our hardware. Same shape as the live one; addresses, serials and names are invented.",
+
+  "facts": {
+    "battery.soc": { "value": 28, "unit": "%", "source": "inverter", "at": "2026-10-27T11:00:00+02:00" },
+    "battery.power_w": { "value": 2140, "unit": "W", "note": "positive = discharging", "source": "inverter", "at": "2026-10-27T11:00:00+02:00" },
+    "battery.capacity_kwh": { "value": 32.0, "unit": "kWh", "source": "configuration" },
+    "pv.power_w": { "value": 410, "unit": "W", "source": "inverter", "at": "2026-10-27T11:00:00+02:00" },
+    "load.power_w": { "value": 2550, "unit": "W", "source": "inverter", "at": "2026-10-27T11:00:00+02:00" },
+    "grid.available": { "value": false, "source": "transfer-switch", "at": "2026-10-27T10:58:00+02:00" },
+    "autonomy.hours": { "value": 4.2, "unit": "h", "derived_from": ["battery.soc", "battery.capacity_kwh", "battery.power_w"] }
+  },
+
+  "inventory": [
+    { "id": "guest-wifi",       "kind": "wifi_ssid", "label": "Guest Wi-Fi",            "measured_w": 120, "rated_w": 150, "protected": false },
+    { "id": "office-wifi",      "kind": "wifi_ssid", "label": "Office Wi-Fi",           "measured_w": 95,  "rated_w": 120, "protected": false },
+    { "id": "media-server",     "kind": "host",      "label": "Media server",           "measured_w": 180, "rated_w": 250, "protected": false },
+    { "id": "lab-switch",       "kind": "switch",    "label": "Lab switch (8 port PoE)","measured_w": 210, "rated_w": 370, "protected": false },
+    { "id": "gate-camera",      "kind": "camera",    "label": "Gate camera",            "measured_w": 9,   "rated_w": 12,  "protected": true },
+    { "id": "gate-controller",  "kind": "iot",       "label": "Gate controller",        "measured_w": 4,   "rated_w": 8,   "protected": true },
+    { "id": "core-switch",      "kind": "switch",    "label": "Core switch",            "measured_w": 65,  "rated_w": 90,  "protected": true },
+    { "id": "critical-station", "kind": "host",      "label": "Critical workstation",   "measured_w": 140, "rated_w": 300, "protected": true }
+  ],
+
+  "protected": ["gate-camera", "gate-controller", "core-switch", "critical-station"]
+}

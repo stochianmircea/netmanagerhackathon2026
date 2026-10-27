@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/stochianmircea/energy-aware-network-agent/schema/plan.schema.json",
+  "title": "Energy-Aware Network Agent — Plan",
+  "description": "The strict shape of every plan the model is allowed to return. A plan is a PROPOSAL. Nothing here is executed until src/validator.php has accepted it, and the validator checks things this schema cannot: that every target exists in the inventory, that no target is protected, and that every claim cites evidence that is actually in the state.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "state_ref", "reasoning", "actions"],
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "description": "Bumped when the shape changes. A plan without it is rejected rather than guessed at."
+    },
+    "state_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "The id of the exact state reading this plan was computed from. The validator refuses a plan whose state_ref is not the state it was handed: a plan argued on yesterday's battery is not a plan about now."
+    },
+    "reasoning": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 4000,
+      "description": "Why, in the model's own words. Read by a human before approval. Never parsed for decisions."
+    },
+    "actions": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 16,
+      "description": "May be empty. 'Do nothing' is a legitimate plan and must be expressible, otherwise the model learns to always find something to switch off.",
+      "items": { "$ref": "#/$defs/action" }
+    }
+  },
+  "$defs": {
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "operation", "because"],
+      "properties": {
+        "target": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9_-]{1,62}$",
+          "description": "An id from the inventory handed to the model. The validator rejects any id it has not been given — the model cannot name a device into existence."
+        },
+        "operation": {
+          "enum": ["disable", "enable", "limit_bandwidth", "set_power_profile"],
+          "description": "A closed vocabulary. Anything outside it is rejected whole; the executor has no code path for an operation it does not know, and that is on purpose."
+        },
+        "argument": {
+          "type": ["integer", "string", "null"],
+          "description": "Only for operations that take one (e.g. limit_bandwidth in kbit/s). Checked per operation by the validator."
+        },
+        "expected_saving_w": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100000,
+          "description": "What the model thinks this saves. The validator compares it against the device's measured or rated draw and rejects a figure that cannot come from this device."
+        },
+        "because": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["policy_line", "evidence"],
+          "properties": {
+            "policy_line": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Which line of the human-written policy this action follows from."
+            },
+            "evidence": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 8,
+              "items": { "type": "string", "minLength": 1, "maxLength": 64 },
+              "description": "Ids of facts in the state that justify this action. The validator resolves each one; an action justified by a fact that is not there is rejected."
+            }
+          }
+        }
+      }
+    }
+  }
+}

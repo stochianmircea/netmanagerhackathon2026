@@ -12,8 +12,8 @@ into concrete network actions, and refuses on its own to touch what must stay al
 > Everything listed here was written during the building period.
 > The commit history starts on Oct 27 and matches this list.
 
-- [ ] `schema/plan.schema.json` — the strict shape every plan must have
-- [ ] `src/validator.php` — the brake: the never-touch list is enforced **in code**,
+- [x] `schema/plan.schema.json` — the strict shape every plan must have
+- [x] `src/validator.php` — the brake: the never-touch list is enforced **in code**,
       not asked for in the prompt. A plan naming a protected target is rejected whole.
 - [ ] `src/collector.php` — reads the live inverter state
 - [ ] `src/compiler.php` — policy in English + state → an argued plan, via an
@@ -21,7 +21,7 @@ into concrete network actions, and refuses on its own to touch what must stay al
 - [ ] `src/executor.php` — applies the approved plan through the RouterOS API
 - [ ] `src/journal.php` — what was proposed, what was approved, what ran
 - [ ] `policy/example-policy.md` — the English policy the model compiles
-- [ ] `fixtures/sample-state.json` — anonymised state, so judges can run this
+- [x] `fixtures/sample-state.json` — anonymised state, so judges can run this
       without our hardware
 - [ ] `docs/demo-script.md` — the 3-minute demo, shot on real hardware
 

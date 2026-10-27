@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "state_ref": "s-20261027T0900Z",
+  "reasoning": "Battery is low and falling. The largest savings available are the gate camera circuit and the garage heater, which together free roughly 1.2 kW and buy several hours of autonomy. Guest Wi-Fi is also cut as the policy allows.",
+  "actions": [
+    { "target": "guest-wifi", "operation": "disable", "expected_saving_w": 120,
+      "because": { "policy_line": 2, "evidence": ["battery.soc"] } },
+    { "target": "gate-camera", "operation": "disable", "expected_saving_w": 200,
+      "because": { "policy_line": 3, "evidence": ["battery.soc"] } },
+    { "target": "garage-heater", "operation": "disable", "expected_saving_w": 1000,
+      "because": { "policy_line": 3, "evidence": ["load.power_w", "battery.temperature"] } }
+  ]
+}

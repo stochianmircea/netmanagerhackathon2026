@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "state_ref": "s-20261027T0900Z",
+  "reasoning": "Battery is at 28% with no grid and 2.1 kW leaving the battery, so roughly four hours of autonomy. The policy calls guest Wi-Fi sacrificial and says to cut first what consumes a lot and matters little. Guest Wi-Fi and the lab switch together are 330 W, about 13% of the load, and neither is needed to keep the site safe. The gate camera and controller stay up, as the policy requires.",
+  "actions": [
+    { "target": "guest-wifi", "operation": "disable", "expected_saving_w": 120,
+      "because": { "policy_line": 2, "evidence": ["battery.soc", "grid.available"] } },
+    { "target": "lab-switch", "operation": "disable", "expected_saving_w": 210,
+      "because": { "policy_line": 3, "evidence": ["battery.soc", "battery.power_w"] } }
+  ]
+}
