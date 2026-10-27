@@ -1,0 +1,13 @@
+{
+  "note": "Anonymised readings in the shape the collector consumes, so this repository runs without our hardware. Numbers are real in magnitude, invented in detail.",
+  "readings": [
+    { "device": "inverter-main", "at": "2026-10-27T11:00:00+02:00", "source": "inverter", "responding": true,
+      "soc": 28, "batt_w": 2140, "batt_v": 51.8, "pv_w": 410, "load_w": 2550, "grid_w": 0,
+      "day_pv": 3.2, "total_pv": 10702.3 },
+    { "device": "inverter-second", "at": "2026-10-27T11:00:00+02:00", "source": "inverter", "responding": true,
+      "pv_w": 0, "day_pv": 0.0, "total_pv": 13042.2 },
+    { "device": "grid-meter", "at": "2026-10-27T11:00:00+02:00", "source": "meter", "responding": true,
+      "va": 237.9, "vb": 230.4, "vc": 232.0, "pa": 0, "pb": 0, "pc": 0,
+      "imp_kwh": 3268.321, "exp_kwh": 17905.424 }
+  ]
+}

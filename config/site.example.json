@@ -1,0 +1,25 @@
+{
+  "name": "example-site",
+  "note": "Written by the site owner, not by the model and not by a measurement. The inventory says what exists and what it draws; `protected` says what must stay alive whatever the model proposes. src/validator.php enforces it in code.",
+
+  "battery_capacity_kwh": 32.0,
+
+  "devices": {
+    "1": "inverter-main",
+    "2": "grid-meter",
+    "3": "inverter-second"
+  },
+
+  "inventory": [
+    { "id": "guest-wifi",       "kind": "wifi_ssid", "label": "Guest Wi-Fi",             "measured_w": 120, "rated_w": 150, "protected": false },
+    { "id": "office-wifi",      "kind": "wifi_ssid", "label": "Office Wi-Fi",            "measured_w": 95,  "rated_w": 120, "protected": false },
+    { "id": "media-server",     "kind": "host",      "label": "Media server",            "measured_w": 180, "rated_w": 250, "protected": false },
+    { "id": "lab-switch",       "kind": "switch",    "label": "Lab switch (8 port PoE)", "measured_w": 210, "rated_w": 370, "protected": false },
+    { "id": "gate-camera",      "kind": "camera",    "label": "Gate camera",             "measured_w": 9,   "rated_w": 12,  "protected": true },
+    { "id": "gate-controller",  "kind": "iot",       "label": "Gate controller",         "measured_w": 4,   "rated_w": 8,   "protected": true },
+    { "id": "core-switch",      "kind": "switch",    "label": "Core switch",             "measured_w": 65,  "rated_w": 90,  "protected": true },
+    { "id": "critical-station", "kind": "host",      "label": "Critical workstation",    "measured_w": 140, "rated_w": 300, "protected": true }
+  ],
+
+  "protected": ["gate-camera", "gate-controller", "core-switch", "critical-station"]
+}
