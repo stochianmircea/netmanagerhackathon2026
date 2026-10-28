@@ -5,6 +5,10 @@ Meta Global AI Developer Hackathon 2026 · Startup Track · **Push the Frontier*
 An agent that reads a real solar installation, compiles a policy **written in plain English**
 into concrete network actions, and refuses on its own to touch what must stay alive.
 
+The policy is compiled by **Llama 3.3, running on our own hardware** through Ollama — no cloud
+call, no site data leaving the building. The model proposes and argues; code decides what may
+be touched at all.
+
 ---
 
 ## What is new — built during the Hackathon (Oct 27 – Nov 4, 2026)
@@ -16,14 +20,19 @@ into concrete network actions, and refuses on its own to touch what must stay al
 - [x] `src/validator.php` — the brake: the never-touch list is enforced **in code**,
       not asked for in the prompt. A plan naming a protected target is rejected whole.
 - [x] `src/collector.php` — reads the live inverter state
-- [ ] `src/compiler.php` — policy in English + state → an argued plan, via an
-      **open-weight model running on our own hardware**
-- [ ] `src/executor.php` — applies the approved plan through the RouterOS API
-- [ ] `src/journal.php` — what was proposed, what was approved, what ran
-- [ ] `policy/example-policy.md` — the English policy the model compiles
+- [x] `src/compiler.php` — policy in English + state → an argued plan, via
+      **Llama 3.3 running on our own hardware** (Ollama), with one code-driven
+      correction round: the validator's rejections go back to the model exactly once,
+      and a second failure is a refusal, not a third attempt
+- [x] `src/executor.php` — applies the approved plan through the RouterOS API,
+      bound to the fingerprint of the plan that was approved
+- [x] `src/journal.php` — what was proposed, what was approved, what ran —
+      and every action separately, including the ones that failed
+- [x] `policy/example-policy.md` — the English policy the model compiles
 - [x] `fixtures/sample-state.json` — anonymised state, so judges can run this
       without our hardware
-- [ ] `docs/demo-script.md` — the 3-minute demo, shot on real hardware
+- [x] `docs/demo-script.md` — the shot list for the 3-minute demo, forced on real
+      hardware (the video link goes in below, before submission)
 
 ## What already existed — NOT part of the Hackathon
 
