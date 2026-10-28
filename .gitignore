@@ -25,3 +25,8 @@ node_modules/
 __pycache__/
 *.pyc
 .DS_Store
+
+# copiile de siguranta nu intra niciodata in depozit
+*.inainte_*
+*.bak
+*.orig
