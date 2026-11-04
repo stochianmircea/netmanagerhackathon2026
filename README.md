@@ -25,7 +25,9 @@ changes the quality of the proposal and nothing about the guarantee.
 ## What is new — built during the Hackathon (Oct 27 – Nov 4, 2026)
 
 > Everything listed here was written during the building period.
-> The commit history starts on Oct 27 and matches this list.
+> The repository was scaffolded on Oct 26 with the licence and .gitignore only.
+> Every item listed here was written during the building period, and the commit
+> history from Oct 27 on matches this list.
 
 - [x] `schema/plan.schema.json` — the strict shape every plan must have
 - [x] `src/validator.php` — the brake: the never-touch list is enforced **in code**,
@@ -100,7 +102,7 @@ php src/collector.php --fixture fixtures/sample-state.json
 
 ## Demo video
 
-_(link added before submission)_
+<ADRESA_FILMULUI>
 
 ## License
 
