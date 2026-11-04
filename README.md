@@ -96,7 +96,10 @@ deciding what is allowed to be touched.
 
 ```
 cp .env.example .env
+. ./mediu.sh   # puts .env into the environment: the code reads it with getenv() only
 php src/collector.php --fixture fixtures/sample-state.json
+php src/compiler.php --policy=policy/example-policy.md \
+  --state=fixtures/sample-state.json --furnizor=meta
 ```
 
 ## Demo video
