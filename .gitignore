@@ -1,36 +1,46 @@
+# NM_HACKREPO — what never goes into a public repository
 
-*.avi
-*.bak
-config.php
-*.copie.*
-# copiile de siguranta nu intra niciodata in depozit
-creds*
-*.db
-.DS_Store
+# secrets and keys
 *.env
 !.env.example
+creds*
+secrets*
+config.php
+*.key
+*.pem
+*.p12
+*.jks
+*keystore*
+
+# databases and dumps
+*.db
+*.sqlite
+*.sql
+
+# backups never go into the repository
+*.bak
+*.orig
+*.copie.*
 *.inainte_*
 .inainte_*
-*.jks
-*.key
-*keystore*
-*.log
-*.mkv
-*.mov
-*.mp4
-.nm_*
-# NM_HACKREPO — ce nu intra NICIODATA intr-un depozit public
-node_modules/
-*.orig
-*.p12
-*.pem
-*.pyc
-__pycache__/
 .respins_*
-secrets*
-*.sql
-*.sqlite
+.nm_*
+
+# archives
 *.tar.gz
 *.tgz
-*.wav
 *.zip
+
+# video and audio
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.wav
+
+# tool droppings
+*.log
+*.pyc
+__pycache__/
+node_modules/
+.DS_Store
