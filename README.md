@@ -104,7 +104,11 @@ php src/compiler.php --policy=policy/example-policy.md \
 
 ## Demo video
 
-_(link added before submission)_
+https://youtu.be/IMXgvPwjl3k
+
+_Narration is in Romanian; English subtitles are available on the video._
+
+_Judges: demo credentials are in the submission form._
 
 ## License
 
