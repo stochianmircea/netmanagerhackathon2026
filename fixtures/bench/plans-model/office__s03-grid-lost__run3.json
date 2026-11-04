@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s03-grid-lost",
+        "reasoning": "The battery state of charge is at 55%, which is above the threshold of 30% specified in policy line 3. Given this condition and considering policy lines 1 and 2, there's no immediate need to cut power to any devices as the critical systems (like cameras at the gate and the gate controller) are not mentioned among the devices that can be controlled. Policy line 4 also indicates that critical stations should never be touched, but since none of the controllable devices are listed as critical in the provided context, we focus on the general state. Since the battery is discharging (battery.power_w is positive), and the grid is not available, we need to ensure we're using power efficiently. However, with a current autonomy of 5.5 hours and no immediate threat to the battery's state of charge, there are no actions required at this moment based on the given policy and measured state.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 196.6,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 3,
+        "at": "2026-11-03T23:50:30+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

@@ -1,0 +1,68 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s04-below-30",
+        "reasoning": "Following policy line 3, since the battery state of charge (battery.soc) is below 30% at 28%, we need to cut what consumes a lot and matters little. The measured state shows that the battery is discharging (battery.power_w is positive), and the autonomy is only 2 hours, indicating a need for conservation. Given these conditions, we will prioritize disabling devices that consume significant power but are not critical.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "autonomy.hours"
+                    ]
+                }
+            },
+            {
+                "target": "print-room",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 160,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "autonomy.hours"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "autonomy.hours"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 179,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 3,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-11-03T23:56:04+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

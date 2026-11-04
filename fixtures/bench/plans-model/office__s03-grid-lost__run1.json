@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s03-grid-lost",
+        "reasoning": "The battery state of charge is at 55%, which is above the threshold of 30% specified in policy line 3. Given this condition and considering policy lines 1 and 2, there's no immediate need to cut power to any devices as the autonomy hours are still at 5.5 hours. Policy line 4 also dictates that critical stations are never touched, which aligns with not taking any action on [NEVER TOUCH] devices. Since the current state does not necessitate cutting power to non-critical devices based on the given policies and measured state, no actions are required at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 115.5,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-11-03T23:44:32+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

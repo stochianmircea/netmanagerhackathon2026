@@ -1,0 +1,133 @@
+{
+    "state_id": "bench-office__s01-comfortable",
+    "taken_at": "2026-10-29T01:57:25+02:00",
+    "site": "office",
+    "note": "Bench case: A tenant office floor · sun, grid present, nothing needs doing",
+    "facts": {
+        "battery.soc": {
+            "value": 82,
+            "unit": "%",
+            "source": "inverter"
+        },
+        "battery.power_w": {
+            "value": 0,
+            "unit": "W",
+            "note": "positive = discharging",
+            "source": "inverter"
+        },
+        "pv.power_w": {
+            "value": 3400,
+            "unit": "W",
+            "source": "inverter"
+        },
+        "load.power_w": {
+            "value": 1900,
+            "unit": "W",
+            "source": "inverter"
+        },
+        "grid.available": {
+            "value": true,
+            "source": "transfer-switch"
+        },
+        "battery.capacity_kwh": {
+            "value": 15,
+            "unit": "kWh",
+            "source": "configuration"
+        },
+        "autonomy.hours": {
+            "value": 99,
+            "unit": "h",
+            "derived_from": [
+                "battery.soc",
+                "battery.capacity_kwh",
+                "battery.power_w"
+            ]
+        }
+    },
+    "inventory": [
+        {
+            "id": "signage",
+            "kind": "host",
+            "label": "Lobby signage screens",
+            "measured_w": 240,
+            "rated_w": 312,
+            "protected": false,
+            "importance": 1,
+            "operations": {
+                "disable": 240
+            }
+        },
+        {
+            "id": "coffee-machine",
+            "kind": "iot",
+            "label": "Connected coffee machine",
+            "measured_w": 95,
+            "rated_w": 123,
+            "protected": false,
+            "importance": 1,
+            "operations": {
+                "disable": 95
+            }
+        },
+        {
+            "id": "desk-wifi",
+            "kind": "wifi_ssid",
+            "label": "Desk Wi-Fi",
+            "measured_w": 110,
+            "rated_w": 143,
+            "protected": false,
+            "importance": 4,
+            "operations": {
+                "limit_bandwidth": 9
+            }
+        },
+        {
+            "id": "print-room",
+            "kind": "host",
+            "label": "Print room",
+            "measured_w": 160,
+            "rated_w": 208,
+            "protected": false,
+            "importance": 2,
+            "operations": {
+                "disable": 160,
+                "set_power_profile": 40
+            }
+        },
+        {
+            "id": "badge-reader",
+            "kind": "iot",
+            "label": "Door badge reader",
+            "measured_w": 12,
+            "rated_w": 15,
+            "protected": true,
+            "importance": 5,
+            "operations": []
+        },
+        {
+            "id": "fire-panel",
+            "kind": "iot",
+            "label": "Fire panel link",
+            "measured_w": 7,
+            "rated_w": 9,
+            "protected": true,
+            "importance": 5,
+            "operations": []
+        },
+        {
+            "id": "floor-switch",
+            "kind": "switch",
+            "label": "Floor switch",
+            "measured_w": 70,
+            "rated_w": 91,
+            "protected": true,
+            "importance": 5,
+            "operations": []
+        }
+    ],
+    "protected": [
+        "badge-reader",
+        "fire-panel",
+        "floor-switch"
+    ]
+}

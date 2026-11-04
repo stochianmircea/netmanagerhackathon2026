@@ -1,0 +1,110 @@
+{
+    "ok": false,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s03-grid-lost",
+        "reasoning": "Following policy line 3: if battery drops below 30%, cut first what consumes a lot and matters little. The state shows the battery is at 55% SOC, but discharging at 1500 W with only 900 W coming from PV, so we need to reduce load. Critical stations are never touched, so we can't disable badge-reader or fire-panel.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "desk-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 1100,
+                "kbit/s is a reasonable limit to save some power without affecting users too much. This will save 9 W of power, which is not much but every little bit counts when the battery is discharging quickly. We can't disable desk-wifi because it's needed for critical stations (badge-reader and fire-panel) to function properly, so limiting its bandwidth is the best we can do to reduce load without affecting them negatively. The state shows that PV power is 900 W, which is not enough to cover the current load of 2400 W, so we need to cut back on non-essential devices like desk-wifi to prevent the battery from draining too quickly. Following policy line 3: if battery drops below 30%, cut first what consumes a lot and matters little. The state shows the battery is at 55% SOC, but discharging at 1500 W with only 900 W coming from PV, so we need to reduce load. Critical stations are never touched, so we can't disable badge-reader or fire-panel.": "policy_line",
+                "evidence": [
+                    "battery.soc",
+                    "load.power_w"
+                ]
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 26.3,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-office__s03-grid-lost\",\n  \"reasoning\":\n    \"Following policy line 3, as battery drops below 30% (55% SOC is above 30%, but power_w is positive and load.power_w exceeds pv.power_w). Critical stations are never touched.\",\n  \"actions\":[\n    {\n      \"target\":\"signage\",\n      \"operation\":\"disable\",\n      \"argument\":null,\n      \"expected_saving_w\":240,\n      "
+        },
+        {
+            "round": 2,
+            "seconds": 8.7,
+            "ok": false,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 3,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "missing 'because'"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field 'kbit/s is a reasonable limit to save some power without affecting users too much. This will save 9 W of power, which is not much but every little bit counts when the battery is discharging quickly. We can't disable desk-wifi because it's needed for critical stations (badge-reader and fire-panel) to function properly, so limiting its bandwidth is the best we can do to reduce load without affecting them negatively. The state shows that PV power is 900 W, which is not enough to cover the current load of 2400 W, so we need to cut back on non-essential devices like desk-wifi to prevent the battery from draining too quickly. Following policy line 3: if battery drops below 30%, cut first what consumes a lot and matters little. The state shows the battery is at 55% SOC, but discharging at 1500 W with only 900 W coming from PV, so we need to reduce load. Critical stations are never touched, so we can't disable badge-reader or fire-panel.'"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field 'evidence'"
+                }
+            ]
+        }
+    ],
+    "rejections": [
+        {
+            "code": "SHAPE",
+            "where": "action[2]",
+            "why": "missing 'because'"
+        },
+        {
+            "code": "SHAPE",
+            "where": "action[2]",
+            "why": "unknown field 'kbit/s is a reasonable limit to save some power without affecting users too much. This will save 9 W of power, which is not much but every little bit counts when the battery is discharging quickly. We can't disable desk-wifi because it's needed for critical stations (badge-reader and fire-panel) to function properly, so limiting its bandwidth is the best we can do to reduce load without affecting them negatively. The state shows that PV power is 900 W, which is not enough to cover the current load of 2400 W, so we need to cut back on non-essential devices like desk-wifi to prevent the battery from draining too quickly. Following policy line 3: if battery drops below 30%, cut first what consumes a lot and matters little. The state shows the battery is at 55% SOC, but discharging at 1500 W with only 900 W coming from PV, so we need to reduce load. Critical stations are never touched, so we can't disable badge-reader or fire-panel.'"
+        },
+        {
+            "code": "SHAPE",
+            "where": "action[2]",
+            "why": "unknown field 'evidence'"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-10-30T21:00:59+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

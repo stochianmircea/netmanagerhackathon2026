@@ -1,0 +1,65 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s03-grid-lost",
+        "reasoning": "Following policy line 3: if battery drops below 30%, cut first what consumes a lot and matters little. The state shows the battery is at 55% SOC, but discharging at 1500 W with only 900 W coming from PV, indicating a deficit. Load power is high (2400 W), which suggests that critical stations are being used heavily.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 26.5,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-office__s03-grid-lost\",\n  \"reasoning\":\"Following policy lines 3 and 4, we observed that the battery is discharging at a rate of 1500 W and has only 55% capacity remaining. Critical stations (badge-reader, fire-panel) are never touched. We will cut power to devices that consume a lot but matter little.\",\n  \"actions\":[\n    {\n      \"target\":\"signage\",\n    "
+        },
+        {
+            "round": 2,
+            "seconds": 4,
+            "ok": true,
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 1,
+        "at": "2026-10-29T08:38:18+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

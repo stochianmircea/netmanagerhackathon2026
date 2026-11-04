@@ -1,0 +1,52 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s08-ambiguous",
+        "reasoning": "Following policy lines 4, 5, and 7: cut entertainment and convenience first, machines mid-job matter more than comfort, and act if the battery drops below 30%. The state shows a battery level of 29% and discharging at 2120 W.",
+        "actions": [
+            {
+                "target": "charger-bank",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 420,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "shop-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 70000,
+                "expected_saving_w": 7,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "pv.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 2.8,
+            "ok": true,
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 3,
+        "at": "2026-10-29T08:57:31+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

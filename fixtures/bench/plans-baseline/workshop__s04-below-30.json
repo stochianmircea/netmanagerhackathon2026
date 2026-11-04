@@ -1,0 +1,15 @@
+{
+    "schema_version": 1,
+    "state_ref": "bench-workshop__s04-below-30",
+    "reasoning": "battery 28% below 30% and no grid; cut down the written order until 383 W was covered",
+    "actions": [
+        {
+            "target": "charger-bank",
+            "operation": "disable",
+            "expected_saving_w": 420,
+            "because": {
+                "rule": "cut_order position 1"
+            }
+        }
+    ]
+}

@@ -1,0 +1,133 @@
+{
+    "state_id": "bench-workshop__s08-ambiguous",
+    "taken_at": "2026-10-29T01:57:25+02:00",
+    "site": "workshop",
+    "note": "Bench case: A workshop with machines · adversarial: two devices are equally sacrificial",
+    "facts": {
+        "battery.soc": {
+            "value": 29,
+            "unit": "%",
+            "source": "inverter"
+        },
+        "battery.power_w": {
+            "value": 2120,
+            "unit": "W",
+            "note": "positive = discharging",
+            "source": "inverter"
+        },
+        "pv.power_w": {
+            "value": 380,
+            "unit": "W",
+            "source": "inverter"
+        },
+        "load.power_w": {
+            "value": 2500,
+            "unit": "W",
+            "source": "inverter"
+        },
+        "grid.available": {
+            "value": false,
+            "source": "transfer-switch"
+        },
+        "battery.capacity_kwh": {
+            "value": 48,
+            "unit": "kWh",
+            "source": "configuration"
+        },
+        "autonomy.hours": {
+            "value": 6.6,
+            "unit": "h",
+            "derived_from": [
+                "battery.soc",
+                "battery.capacity_kwh",
+                "battery.power_w"
+            ]
+        }
+    },
+    "inventory": [
+        {
+            "id": "dust-extractor",
+            "kind": "host",
+            "label": "Dust extractor",
+            "measured_w": 900,
+            "rated_w": 1170,
+            "protected": false,
+            "importance": 2,
+            "operations": {
+                "disable": 900
+            }
+        },
+        {
+            "id": "charger-bank",
+            "kind": "host",
+            "label": "Tool charger bank",
+            "measured_w": 420,
+            "rated_w": 546,
+            "protected": false,
+            "importance": 1,
+            "operations": {
+                "disable": 420,
+                "set_power_profile": 160
+            }
+        },
+        {
+            "id": "shop-wifi",
+            "kind": "wifi_ssid",
+            "label": "Shop Wi-Fi",
+            "measured_w": 85,
+            "rated_w": 110,
+            "protected": false,
+            "importance": 3,
+            "operations": {
+                "limit_bandwidth": 7
+            }
+        },
+        {
+            "id": "cnc",
+            "kind": "host",
+            "label": "CNC controller",
+            "measured_w": 650,
+            "rated_w": 845,
+            "protected": false,
+            "importance": 4,
+            "operations": {
+                "disable": 650
+            }
+        },
+        {
+            "id": "alarm",
+            "kind": "iot",
+            "label": "Alarm panel",
+            "measured_w": 11,
+            "rated_w": 14,
+            "protected": true,
+            "importance": 5,
+            "operations": []
+        },
+        {
+            "id": "gate-camera",
+            "kind": "camera",
+            "label": "Yard camera",
+            "measured_w": 9,
+            "rated_w": 11,
+            "protected": true,
+            "importance": 5,
+            "operations": []
+        },
+        {
+            "id": "core-switch",
+            "kind": "switch",
+            "label": "Core switch",
+            "measured_w": 60,
+            "rated_w": 78,
+            "protected": true,
+            "importance": 5,
+            "operations": []
+        }
+    ],
+    "protected": [
+        "alarm",
+        "gate-camera",
+        "core-switch"
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s01-comfortable",
+        "reasoning": "The current battery state of charge is 82%, which is above the threshold of 30%. The system is currently not discharging as indicated by battery.power_w being 0 W and pv.power_w exceeding load.power_w. Following policy line 1, critical devices such as cameras at the gate and the gate controller are to remain operational. Given that the battery level is high and there's no immediate need to cut power consumption based on the provided state, no actions are necessary at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 89.7,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 3,
+        "at": "2026-11-04T00:47:38+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

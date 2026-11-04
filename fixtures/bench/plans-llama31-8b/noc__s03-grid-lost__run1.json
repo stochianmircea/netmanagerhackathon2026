@@ -1,0 +1,52 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s03-grid-lost",
+        "reasoning": "Following policy lines 3 and 2, as battery level is below 30% and guest Wi-Fi can be sacrificed. The state indicates a high load power of 2400 W, which suggests that devices consuming a lot are currently active.",
+        "actions": [
+            {
+                "target": "media-server",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 180,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "lab-switch",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 210,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 3.7,
+            "ok": true,
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 1,
+        "at": "2026-10-29T08:34:40+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

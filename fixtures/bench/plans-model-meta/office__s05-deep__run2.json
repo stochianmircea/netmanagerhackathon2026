@@ -1,0 +1,69 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s05-deep",
+        "reasoning": "Battery SOC 12% is below the 30% threshold so policy line 3 applies. Grid unavailable, load 2300W with 2150W discharge and only 0.8h autonomy. Plan cuts high-consumption low-importance loads first (signage, print-room, coffee-machine) and leaves NEVER TOUCH devices alone per line 4. Lines 1-2 reference gate cameras and guest Wi-Fi which are not in the device list so no action for them.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available",
+                        "autonomy.hours",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "print-room",
+                "operation": "disable",
+                "expected_saving_w": 160,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available",
+                        "autonomy.hours"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available",
+                        "autonomy.hours"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 19.1,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 3,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 2,
+        "at": "2026-10-30T20:27:04+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

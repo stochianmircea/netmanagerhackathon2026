@@ -1,0 +1,52 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s06-night",
+        "reasoning": "Following policy lines 3 and 4, I identified devices to cut power to in order to conserve battery life. The gate camera and controller must stay alive, so they are exempt.",
+        "actions": [
+            {
+                "target": "lab-switch",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 210,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "media-server",
+                "operation": "set_power_profile",
+                "argument": "eco",
+                "expected_saving_w": 55,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 3.3,
+            "ok": true,
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 2,
+        "at": "2026-10-29T08:35:46+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

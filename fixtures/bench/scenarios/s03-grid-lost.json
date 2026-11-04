@@ -1,0 +1,31 @@
+{
+  "scenario_id": "s03-grid-lost",
+  "note": "transfer switch flips, battery carries the site",
+  "facts": {
+    "battery.soc": {
+      "value": 55,
+      "unit": "%",
+      "source": "inverter"
+    },
+    "battery.power_w": {
+      "value": 1500,
+      "unit": "W",
+      "note": "positive = discharging",
+      "source": "inverter"
+    },
+    "pv.power_w": {
+      "value": 900,
+      "unit": "W",
+      "source": "inverter"
+    },
+    "load.power_w": {
+      "value": 2400,
+      "unit": "W",
+      "source": "inverter"
+    },
+    "grid.available": {
+      "value": false,
+      "source": "transfer-switch"
+    }
+  }
+}

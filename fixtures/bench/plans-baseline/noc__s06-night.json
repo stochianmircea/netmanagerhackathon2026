@@ -1,0 +1,6 @@
+{
+    "schema_version": 1,
+    "state_ref": "bench-noc__s06-night",
+    "reasoning": "battery 34% is at or above the 30% threshold",
+    "actions": []
+}

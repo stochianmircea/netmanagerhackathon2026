@@ -1,0 +1,72 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s01-comfortable",
+        "reasoning": "Following policy line 3, as battery level is below 30% (82% SOC). The state indicates that the load is consuming 1900 W of power, and the PV array is producing 3400 W. This means that there is a surplus of power, but the battery is still discharging at 0 W.",
+        "actions": [
+            {
+                "target": "lab-switch",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 210,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w",
+                        "pv.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "media-server",
+                "operation": "set_power_profile",
+                "argument": "eco",
+                "expected_saving_w": 55,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w",
+                        "pv.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 1.1,
+            "ok": false,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 0,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "missing required field 'actions'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 4,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-10-30T20:56:26+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

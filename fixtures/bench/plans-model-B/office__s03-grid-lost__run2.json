@@ -1,0 +1,57 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s03-grid-lost",
+        "reasoning": "The current battery state of charge is 55%, and the grid is not available. Following policy line 4, we should cut entertainment and convenience first. Since the battery power is discharging at 1500 W and the load power is 2400 W, we need to reduce the load to balance the energy consumption. The PV power is 900 W, which is not enough to cover the load. Therefore, we will disable some devices to reduce the load.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w",
+                        "pv.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w",
+                        "pv.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 161.4,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-11-04T02:52:01+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

@@ -1,0 +1,52 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s05-deep",
+        "reasoning": "Following policy line 3, we cut first what consumes a lot and matters little. The battery is discharging at 2150 W, which is above the capacity of all devices except the print room (160 W). We will disable the coffee machine to save 95 W.",
+        "actions": [
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.power_w",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 1.1,
+            "ok": false,
+            "actions": 0,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "missing required field 'actions'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 2.5,
+            "ok": true,
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 3,
+        "at": "2026-10-29T08:39:52+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

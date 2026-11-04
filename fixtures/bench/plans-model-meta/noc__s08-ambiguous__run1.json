@@ -1,0 +1,41 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s08-ambiguous",
+        "reasoning": "Battery SOC is 29% which is below the 30% threshold with grid unavailable and discharging, so savings are needed per policy lines 2 and 3. Guest Wi-Fi is explicitly sacrificial per line 2, so I will disable it. I am not touching lab-switch, media-server or office-wifi because line 3 does not define what 'matters little' for those devices, and lines 1 and 4 protect gate and critical devices.",
+        "actions": [
+            {
+                "target": "guest-wifi",
+                "operation": "disable",
+                "expected_saving_w": 120,
+                "because": {
+                    "policy_line": 2,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 11.7,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 1,
+        "at": "2026-10-30T20:24:01+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

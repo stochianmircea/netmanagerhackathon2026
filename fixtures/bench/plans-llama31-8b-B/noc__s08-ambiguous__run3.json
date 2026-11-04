@@ -1,0 +1,64 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s08-ambiguous",
+        "reasoning": "Following policy lines 4, 5, and 7: cut entertainment and convenience first, machines mid-job matter more than comfort, and act if the battery drops below 30%. The state shows a battery SOC of 29%, which is below 30%.",
+        "actions": [
+            {
+                "target": "media-server",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 180,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            },
+            {
+                "target": "lab-switch",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 210,
+                "because": {
+                    "policy_line": 5,
+                    "evidence": [
+                        "load.power_w",
+                        "battery.soc"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 3.4,
+            "ok": false,
+            "actions": 2,
+            "rejections": [
+                {
+                    "code": "CAPABILITY",
+                    "where": "action[1]",
+                    "why": "'limit_bandwidth' is not declared for 'lab-switch' (declared: disable)"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 4,
+            "ok": true,
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 3,
+        "at": "2026-10-29T08:50:11+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

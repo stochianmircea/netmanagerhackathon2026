@@ -1,0 +1,52 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s03-grid-lost",
+        "reasoning": "The current battery state of charge is 55%, and the grid is not available. Following policy line 4, we should cut entertainment and convenience first. The media server is a part of this category, so it will be disabled to conserve energy. Additionally, the office Wi-Fi can have its bandwidth limited to reduce power consumption. Policy lines 1, 2, 3, 5, 6, and 7 do not require any actions at this time because the battery level is above the thresholds mentioned in those policies.",
+        "actions": [
+            {
+                "target": "media-server",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 180,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available"
+                    ]
+                }
+            },
+            {
+                "target": "office-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 50000,
+                "expected_saving_w": 6,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "load.power_w",
+                        "pv.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 170.2,
+            "ok": true,
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 1,
+        "at": "2026-10-29T05:14:48+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

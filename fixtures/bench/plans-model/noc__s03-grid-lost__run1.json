@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s03-grid-lost",
+        "reasoning": "The battery state of charge is at 55%, which is above the threshold of 30% specified in policy line 3. Given this condition and the fact that the grid is not available (grid.available: no), we should prioritize energy conservation without compromising critical systems as per policy lines 1 and 4. However, since the battery's state of charge is still relatively high and there are no immediate indications that we need to cut power to non-critical devices based on the provided measurements, no actions are necessary at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 103,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-11-03T22:43:30+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s06-night",
+        "reasoning": "The battery state of charge is at 34%, which is above the threshold of 30% specified in policy line 3. Given this condition, there's no immediate need to cut power consumption based on the criteria outlined in policy line 3. Policy lines 1 and 4 protect certain devices from being touched, but since the battery level is not critically low, we do not need to consider disabling or limiting any non-essential devices at this time. The current state does not necessitate any actions to reduce power consumption based on the provided policies.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 105.5,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 1,
+        "at": "2026-10-29T03:43:04+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

@@ -1,0 +1,48 @@
+{
+    "ok": false,
+    "plan": null,
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 1.3,
+            "ok": false,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 0,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "missing required field 'actions'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 26.4,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-office__s03-grid-lost\",\n  \"reasoning\":\"Following policy lines 3 and 4, we identified devices to cut power to in order to conserve energy. The battery is discharging at a rate of 1500 W, but the PV array is generating only 900 W, resulting in a net discharge of 600 W.\",\n  \"actions\":[\n    {\n      \"target\":\"signage\",\n      \"operation\":\"disable\",\n      \"arg"
+        }
+    ],
+    "rejections": [
+        {
+            "code": "MODEL",
+            "where": null,
+            "why": "the model did not return a JSON object"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-10-30T21:00:24+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

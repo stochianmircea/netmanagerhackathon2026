@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s03-grid-lost",
+        "reasoning": "Per policy line 3, cuts are only required if battery drops below 30%. State shows battery.soc at 55% with autonomy.hours at 17.6 h despite grid loss, so no low-battery cut is triggered. Policy lines 1, 2 and 4 require no action: gate-camera must stay alive, no Guest Wi-Fi device exists to sacrifice, and critical stations are never touched.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 6.3,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 1,
+        "at": "2026-10-30T20:30:11+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

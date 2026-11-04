@@ -1,0 +1,81 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s05-deep",
+        "reasoning": "The battery state of charge is critically low at 12%, which is below the 15% threshold mentioned in policy line 7. Following this policy and considering the evidence from facts 'battery.soc' and 'battery.power_w', we need to cut everything that is not protected to preserve critical functions. Given the current load and power situation, as indicated by 'load.power_w' and 'pv.power_w', and the lack of grid availability ('grid.available' is 'no'), actions are necessary to reduce consumption.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 7,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 7,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "desk-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 1000,
+                "expected_saving_w": 9,
+                "because": {
+                    "policy_line": 7,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "print-room",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 160,
+                "because": {
+                    "policy_line": 7,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 275.7,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 4,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 3,
+        "at": "2026-11-04T03:13:13+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

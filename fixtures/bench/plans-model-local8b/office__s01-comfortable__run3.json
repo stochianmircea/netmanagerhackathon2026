@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s01-comfortable",
+        "reasoning": "Following policy lines 3 and 4, I determined that no devices need to be cut due to low battery level. The battery is at 82% SOC, which is above the threshold of 30%. Critical stations are never touched, so they will not be included in any actions.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 1.6,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 3,
+        "at": "2026-10-30T20:59:19+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

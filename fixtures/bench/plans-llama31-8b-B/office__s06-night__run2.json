@@ -1,0 +1,45 @@
+{
+    "ok": false,
+    "plan": null,
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 20.4,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-office__s06-night\",\n  \"reasoning\":\n    \"Following policy line 4, we cut entertainment and convenience first. The battery is discharging at a rate of 1750 W, which is above the threshold for action (policy line 7). We also consider the autonomy hours left (2.9 h), but it's not below 20% as mentioned in policy line 5.\",\n  \"actions\":[\n    {\n      \"target\":"
+        },
+        {
+            "round": 2,
+            "seconds": 20.6,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-office__s06-night\",\n  \"reasoning\":\"Following policy line 4, we need to cut entertainment and convenience first. The battery is discharging at 1750 W, which is above the threshold for action (30% in policy line 7). We also have a load of 1750 W, indicating that something is consuming power.\",\n  \"actions\":[\n    {\n      \"target\":\"signage\",\n      \"operation"
+        }
+    ],
+    "rejections": [
+        {
+            "code": "MODEL",
+            "where": null,
+            "why": "the model did not return a JSON object"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 2,
+        "at": "2026-10-29T08:53:29+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

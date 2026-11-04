@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s03-grid-lost",
+        "reasoning": "The battery SoC is at 55%, which is above the threshold of 30% where action is required. Following policy line 7, no immediate action is needed as the battery level is not critically low. The grid is unavailable (grid.available: no), but the autonomy hours are still at 17.6 hours, indicating that there is sufficient power to sustain current loads for an extended period without needing to cut non-essential devices immediately. Thus, no actions are necessary at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 92.1,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 3,
+        "at": "2026-10-29T07:11:18+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

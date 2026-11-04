@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s01-comfortable",
+        "reasoning": "Following policy lines 3 and 4, we determined that no devices need to be cut due to low battery. Critical stations are never touched.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 1.2,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 3,
+        "at": "2026-10-29T08:36:49+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

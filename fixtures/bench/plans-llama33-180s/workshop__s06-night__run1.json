@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s06-night",
+        "reasoning": "Following policy line 3, since the battery drops below 30% is not true (battery.soc is 34%), no critical actions are needed. However, to prepare for potential future discharge and following policy line 2 which marks guest Wi-Fi as sacrificial, we could consider limiting non-essential devices. But given the current state and policies, there's no immediate need to cut power to any device. Thus, no actions are recommended at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 95.7,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 1,
+        "at": "2026-10-29T04:40:37+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

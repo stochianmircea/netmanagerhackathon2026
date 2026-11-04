@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s03-grid-lost",
+        "reasoning": "Grid is lost but battery.soc is 55%, well above the 30% threshold in policy line 3, so no low-battery cut is triggered. autonomy.hours is 11.7h with PV supporting load. Per policy line 2 guest Wi-Fi is sacrificial and would be first to cut if needed, but nothing needs cutting now. Per lines 1 and 4 gate devices and critical station remain untouched.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 6.3,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 3,
+        "at": "2026-10-30T20:20:34+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

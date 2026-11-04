@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s02-midday-cloud",
+        "reasoning": "The current battery state of charge is 61%, which is above the threshold of 30%. The system is discharging at a rate of 1600 W. Following policy line 1, cameras and gate controllers must stay alive. Policy line 2 indicates guest Wi-Fi is sacrificial but since desk-wifi is not explicitly mentioned as guest Wi-Fi, we cannot assume it's sacrificial without more information. Given the current state, there's no immediate need to cut power consumption based on policy lines 3 and 4 because critical systems are not at risk and the battery level is not critically low. Thus, no actions are necessary at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 118.6,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 1,
+        "at": "2026-10-29T03:13:53+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

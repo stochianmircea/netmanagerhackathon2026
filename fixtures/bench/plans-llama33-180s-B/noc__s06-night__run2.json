@@ -1,0 +1,39 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s06-night",
+        "reasoning": "The battery state of charge is at 34%, which is above the threshold of 30% where action is required. However, since we are discharging at a rate of 1750 W and the grid is not available, it's prudent to take preventive measures to conserve energy. Following policy line 4, we should cut entertainment and convenience first.",
+        "actions": [
+            {
+                "target": "media-server",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 180,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 150.4,
+            "ok": true,
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 2,
+        "at": "2026-10-29T05:38:14+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

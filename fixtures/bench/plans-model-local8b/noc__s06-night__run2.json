@@ -1,0 +1,42 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s06-night",
+        "reasoning": "Following policy lines 3 and 2, I determined that we need to cut power consumption. The battery is discharging at 1750 W, which is above the threshold of 30% capacity (policy line 3). Guest Wi-Fi is sacrificial (policy line 2), so it's a good candidate for disabling.",
+        "actions": [
+            {
+                "target": "guest-wifi",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 120,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 2.8,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-10-30T20:58:18+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

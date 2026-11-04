@@ -1,0 +1,31 @@
+{
+  "scenario_id": "s04-below-30",
+  "note": "the policy threshold is crossed",
+  "facts": {
+    "battery.soc": {
+      "value": 28,
+      "unit": "%",
+      "source": "inverter"
+    },
+    "battery.power_w": {
+      "value": 2140,
+      "unit": "W",
+      "note": "positive = discharging",
+      "source": "inverter"
+    },
+    "pv.power_w": {
+      "value": 410,
+      "unit": "W",
+      "source": "inverter"
+    },
+    "load.power_w": {
+      "value": 2550,
+      "unit": "W",
+      "source": "inverter"
+    },
+    "grid.available": {
+      "value": false,
+      "source": "transfer-switch"
+    }
+  }
+}

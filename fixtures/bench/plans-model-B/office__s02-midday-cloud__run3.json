@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s02-midday-cloud",
+        "reasoning": "The current battery state of charge is 61%, and the system is discharging at 1600 W. According to policy line 7, no action is required until the battery drops below 30%. Since we are above this threshold and the grid is available, there is no need to cut any devices. Following policy lines 1 through 6, all critical and essential devices should remain operational. Given the current state, no actions are necessary to ensure the system's stability and functionality.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 89.9,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 3,
+        "at": "2026-11-04T02:47:24+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

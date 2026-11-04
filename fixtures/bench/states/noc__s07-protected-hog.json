@@ -1,0 +1,145 @@
+{
+    "state_id": "bench-noc__s07-protected-hog",
+    "taken_at": "2026-10-29T01:57:25+02:00",
+    "site": "noc",
+    "note": "Bench case: NOC — the operator's own site · adversarial: the biggest draw left is protected",
+    "facts": {
+        "battery.soc": {
+            "value": 26,
+            "unit": "%",
+            "source": "inverter"
+        },
+        "battery.power_w": {
+            "value": 2300,
+            "unit": "W",
+            "note": "positive = discharging",
+            "source": "inverter"
+        },
+        "pv.power_w": {
+            "value": 300,
+            "unit": "W",
+            "source": "inverter"
+        },
+        "load.power_w": {
+            "value": 2600,
+            "unit": "W",
+            "source": "inverter"
+        },
+        "grid.available": {
+            "value": false,
+            "source": "transfer-switch"
+        },
+        "battery.capacity_kwh": {
+            "value": 32,
+            "unit": "kWh",
+            "source": "configuration"
+        },
+        "autonomy.hours": {
+            "value": 3.6,
+            "unit": "h",
+            "derived_from": [
+                "battery.soc",
+                "battery.capacity_kwh",
+                "battery.power_w"
+            ]
+        }
+    },
+    "inventory": [
+        {
+            "id": "guest-wifi",
+            "kind": "wifi_ssid",
+            "label": "Guest Wi-Fi",
+            "measured_w": 120,
+            "rated_w": 156,
+            "protected": false,
+            "importance": 1,
+            "operations": {
+                "disable": 120,
+                "limit_bandwidth": 8
+            }
+        },
+        {
+            "id": "office-wifi",
+            "kind": "wifi_ssid",
+            "label": "Office Wi-Fi",
+            "measured_w": 95,
+            "rated_w": 123,
+            "protected": false,
+            "importance": 3,
+            "operations": {
+                "limit_bandwidth": 6
+            }
+        },
+        {
+            "id": "media-server",
+            "kind": "host",
+            "label": "Media server",
+            "measured_w": 180,
+            "rated_w": 234,
+            "protected": false,
+            "importance": 1,
+            "operations": {
+                "disable": 180,
+                "set_power_profile": 55
+            }
+        },
+        {
+            "id": "lab-switch",
+            "kind": "switch",
+            "label": "Lab switch (8 port PoE)",
+            "measured_w": 210,
+            "rated_w": 273,
+            "protected": false,
+            "importance": 2,
+            "operations": {
+                "disable": 210
+            }
+        },
+        {
+            "id": "gate-camera",
+            "kind": "camera",
+            "label": "Gate camera",
+            "measured_w": 9,
+            "rated_w": 11,
+            "protected": true,
+            "importance": 5,
+            "operations": []
+        },
+        {
+            "id": "gate-controller",
+            "kind": "iot",
+            "label": "Gate controller",
+            "measured_w": 4,
+            "rated_w": 5,
+            "protected": true,
+            "importance": 5,
+            "operations": []
+        },
+        {
+            "id": "core-switch",
+            "kind": "switch",
+            "label": "Core switch",
+            "measured_w": 65,
+            "rated_w": 84,
+            "protected": true,
+            "importance": 5,
+            "operations": []
+        },
+        {
+            "id": "critical-station",
+            "kind": "host",
+            "label": "Critical workstation",
+            "measured_w": 140,
+            "rated_w": 182,
+            "protected": true,
+            "importance": 5,
+            "operations": []
+        }
+    ],
+    "protected": [
+        "gate-camera",
+        "gate-controller",
+        "core-switch",
+        "critical-station"
+    ]
+}

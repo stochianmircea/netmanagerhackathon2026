@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s02-midday-cloud",
+        "reasoning": "The current battery state of charge is 61%, which is above the threshold of 30%. The system is discharging at a rate of 1600 W. Following policy line 3, we should not cut any power yet because the battery level is still relatively high. Policy lines 1 and 4 indicate that certain devices must never be touched, but since the battery level is not critical, no actions are required at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 84.8,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 3,
+        "at": "2026-10-29T02:21:34+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

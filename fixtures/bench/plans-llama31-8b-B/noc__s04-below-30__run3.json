@@ -1,0 +1,88 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s04-below-30",
+        "reasoning": "Following policy line 7, since battery.soc is below 30%. The installation is discharging at a rate of 2140 W and the PV power input is only 410 W. We're prioritizing machines mid-job over comfort features like office Wi-Fi, so we're limiting its bandwidth instead of disabling it entirely for now.",
+        "actions": [
+            {
+                "target": "office-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 1000,
+                "expected_saving_w": 6,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "media-server",
+                "operation": "set_power_profile",
+                "argument": "eco",
+                "expected_saving_w": 55,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "lab-switch",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 210,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 7.9,
+            "ok": false,
+            "actions": 3,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "missing 'because'"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field '# kbit/s, a reasonable limit for office use under load conditions like these. Policy line 3 is not directly relevant here, but it's good to leave Guest Wi-Fi up if possible, so we're prioritizing the office network instead of cutting it off completely at this stage. The state shows that the installation is discharging heavily and the PV input is low, which justifies taking action now rather than waiting for a lower SOC threshold like 15% or below (policy line 7). We're also leaving critical stations untouched as per policy line 2, but they don't draw much power anyway. The CNC and dust extractor are not yet affected by this plan, since the SOC is still above 20%. Policy line 5 prioritizes machines mid-job over comfort features like office Wi-Fi, so we're limiting its bandwidth instead of disabling it entirely for now. This should help reduce load without impacting critical operations too much at this stage.'"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field 'evidence'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 5.6,
+            "ok": true,
+            "actions": 3,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 3,
+        "at": "2026-10-29T08:47:59+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s01-comfortable",
+        "reasoning": "No cuts needed. Per policy line 3, battery.soc is 82% which is well above the 30% threshold, and pv.power_w exceeds load.power_w with grid.available yes and autonomy.hours high, so no load shedding is required. Per lines 1, 2 and 4, gate-camera must stay alive, no Guest Wi-Fi device exists in the device list, and critical NEVER TOUCH stations were left untouched.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 6.5,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 2,
+        "at": "2026-10-30T20:29:41+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

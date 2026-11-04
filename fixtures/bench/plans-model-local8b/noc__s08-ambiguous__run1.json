@@ -1,0 +1,55 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s08-ambiguous",
+        "reasoning": "Following policy lines 3 and 2, as battery SOC is below 30% and guest Wi-Fi is sacrificial. The measured state shows a high load power of 2500 W and a low PV power of 380 W.",
+        "actions": [
+            {
+                "target": "lab-switch",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 210,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "media-server",
+                "operation": "set_power_profile",
+                "argument": "eco",
+                "expected_saving_w": 55,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 3.8,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-10-30T20:59:02+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

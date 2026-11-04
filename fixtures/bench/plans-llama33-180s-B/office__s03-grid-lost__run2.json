@@ -1,0 +1,54 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s03-grid-lost",
+        "reasoning": "The current battery state of charge is 55%, and the power consumption is higher than the available solar power. Following policy lines 4 and 5, we should prioritize cutting non-essential devices to conserve energy. Since the battery SOC is above 30% and there's no immediate need to cut critical systems, we focus on reducing load without impacting essential functions.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w",
+                        "pv.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w",
+                        "pv.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 143.6,
+            "ok": true,
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 2,
+        "at": "2026-10-29T06:10:33+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

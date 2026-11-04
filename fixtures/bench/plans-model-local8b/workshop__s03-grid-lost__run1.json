@@ -1,0 +1,53 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s03-grid-lost",
+        "reasoning": "Following policy line 3, we observed that the battery has dropped below 30% (fact id: battery.soc). We need to cut power consumption. Critical stations are never touched, so we can't disable gate-camera or core-switch.",
+        "actions": [
+            {
+                "target": "dust-extractor",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 900,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            },
+            {
+                "target": "charger-bank",
+                "operation": "set_power_profile",
+                "argument": "eco",
+                "expected_saving_w": 160,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 3.7,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-10-30T21:06:18+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

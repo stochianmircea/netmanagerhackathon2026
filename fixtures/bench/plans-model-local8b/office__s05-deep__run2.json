@@ -1,0 +1,93 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s05-deep",
+        "reasoning": "Following policy lines 3 and 4, we observed that the battery is discharging at a rate of 2150 W, which is above 30% capacity. Critical stations (badge-reader, fire-panel) are never touched, so we focus on non-critical devices. We will disable the signage to save 240 W.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "desk-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 1100,
+                "expected_saving_w": 9,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 7.6,
+            "ok": false,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 3,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "missing 'because'"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field '# Assuming a bandwidth limit of 1.1 Mbit/s (10% of 11 Mbps) to save 9 W, as per device specs and policy line 3. This is a conservative estimate to ensure the network remains functional for critical tasks like badge reader communication and fire panel monitoring, which are not affected by this action. The evidence supporting this decision includes the current load power (2300 W), battery state of charge (12%), and available autonomy (0.8 hours). We aim to reduce non-essential energy consumption while preserving essential services. This action is taken in accordance with policy line 3, which prioritizes cutting devices that consume a lot but matter little when the battery drops below 30% capacity. The expected saving from this action is 9 W, as per device specifications and our previous calculations.'"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field 'evidence'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 5.7,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 3,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-10-30T21:02:31+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

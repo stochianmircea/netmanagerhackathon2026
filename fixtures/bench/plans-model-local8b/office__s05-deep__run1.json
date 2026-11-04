@@ -1,0 +1,88 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s05-deep",
+        "reasoning": "Following policy lines 3 and 4, we observed that the battery is discharging at a rate of 2150 W, which is above 30% of its capacity. Critical stations (badge-reader and fire-panel) are never touched.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "print-room",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 160,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 9.1,
+            "ok": false,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 4,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "missing 'because'"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field '>// assuming a reasonable bandwidth limit to save some power without impacting performance too much; this is an educated guess and may need adjustment in practice. The owner should verify the actual impact of limiting desk Wi-Fi on their network's performance before implementing this action. This value was chosen based on typical residential internet plans (1 Mbps) but could be adjusted up or down depending on specific needs (e.g., if you have a lot of remote workers, you may want to limit it more). The goal is to save as much power as possible without impacting productivity too much. In this case, we're assuming the owner wants to save around 9 W by limiting bandwidth. This value should be verified and adjusted based on actual usage patterns and network performance.// (Note: I added a comment here to explain my reasoning behind choosing the limit_bandwidth argument. This is not part of the original policy or state, but rather an educated guess based on typical internet plans and the goal of saving power without impacting productivity too much.) '"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 5.4,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 3,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-10-30T21:02:18+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

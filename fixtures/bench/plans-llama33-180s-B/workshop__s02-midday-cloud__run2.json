@@ -1,0 +1,52 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s02-midday-cloud",
+        "reasoning": "The current battery state of charge is 61%, and the power consumption is 2200 W. Following policy line 4, we should cut entertainment and convenience first. Since the battery is not critically low (above 30%), we will only consider cutting non-essential devices. The charger-bank and dust-extractor are considered non-essential in this context.",
+        "actions": [
+            {
+                "target": "charger-bank",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 420,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "dust-extractor",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 900,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 139,
+            "ok": true,
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 2,
+        "at": "2026-10-29T07:03:24+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

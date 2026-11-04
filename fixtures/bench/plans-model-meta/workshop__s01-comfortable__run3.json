@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s01-comfortable",
+        "reasoning": "Battery SoC is 82%, well above the 30% cut threshold in policy line 3, so no load shedding is needed. PV exceeds load, grid is available, and autonomy is 99h indicating a comfortable state. Per lines 1 and 4 gate-camera, alarm and core-switch are protected, and line 2 refers to Guest Wi-Fi which is not present as a target, so shop-wifi is left alone. No actions required.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 6.6,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 3,
+        "at": "2026-10-30T20:29:47+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

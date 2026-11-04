@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s03-grid-lost",
+        "reasoning": "The current battery state of charge is 55%, and the grid is not available. Following policy lines 4 and 5, we should cut entertainment and convenience first, but since the battery level is above 30% and there's still a significant amount of autonomy left (5.5 hours), no immediate action to cut devices is necessary according to policy line 7. Thus, no actions are required at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 129.7,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 1,
+        "at": "2026-10-29T06:08:09+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s01-comfortable",
+        "reasoning": "Following policy lines 3 and 2, we observed that the battery is discharging (battery.power_w = 0 W) and has a SOC of 82%. We also noted that Guest Wi-Fi consumes 120 W. Given this evidence, we decided to cut power to Guest Wi-Fi.",
+        "actions": [
+            {
+                "target": "guest-wifi",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 120,
+                "because": {
+                    "policy_line": 2,
+                    "evidence": [
+                        "battery.soc",
+                        "battery.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 2.5,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 3,
+        "at": "2026-10-30T20:56:29+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

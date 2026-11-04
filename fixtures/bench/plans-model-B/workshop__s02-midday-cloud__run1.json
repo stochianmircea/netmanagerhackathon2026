@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s02-midday-cloud",
+        "reasoning": "The current battery state of charge is 61%, which is above the threshold of 30% where action is required. The policy states that entertainment and convenience should be cut first, but since the battery is not under stress, no actions are necessary at this time. Following policy line 1-7, specifically considering lines 4 and 5 for potential cuts, we find that none are needed given the current state.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 88.1,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-11-04T03:45:39+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

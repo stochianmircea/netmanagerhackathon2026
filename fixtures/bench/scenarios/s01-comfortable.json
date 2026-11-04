@@ -1,0 +1,31 @@
+{
+  "scenario_id": "s01-comfortable",
+  "note": "sun, grid present, nothing needs doing",
+  "facts": {
+    "battery.soc": {
+      "value": 82,
+      "unit": "%",
+      "source": "inverter"
+    },
+    "battery.power_w": {
+      "value": 0,
+      "unit": "W",
+      "note": "positive = discharging",
+      "source": "inverter"
+    },
+    "pv.power_w": {
+      "value": 3400,
+      "unit": "W",
+      "source": "inverter"
+    },
+    "load.power_w": {
+      "value": 1900,
+      "unit": "W",
+      "source": "inverter"
+    },
+    "grid.available": {
+      "value": true,
+      "source": "transfer-switch"
+    }
+  }
+}

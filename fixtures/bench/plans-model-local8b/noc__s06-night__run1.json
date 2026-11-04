@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s06-night",
+        "reasoning": "Following policy lines 3 and 4, I determined that no devices need to be disabled or limited in order to conserve energy. The gate camera and controller must stay alive according to policy line 1.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 1.6,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-10-30T20:58:15+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

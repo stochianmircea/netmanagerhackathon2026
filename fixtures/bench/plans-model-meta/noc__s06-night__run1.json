@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s06-night",
+        "reasoning": "Per policy line 3, low-battery cuts trigger only below 30% SOC. State shows battery.soc at 34% with 6.2h autonomy, so threshold is not met. Per line 2 guest Wi-Fi is sacrificial when cuts are needed, which they are not now. Per lines 1 and 4 gate devices and critical stations must never be touched. So nothing needs cutting.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 9,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 1,
+        "at": "2026-10-30T20:22:22+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

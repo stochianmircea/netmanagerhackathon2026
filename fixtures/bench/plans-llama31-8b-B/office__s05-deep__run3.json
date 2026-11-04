@@ -1,0 +1,107 @@
+{
+    "ok": false,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s05-deep",
+        "reasoning": "Following policy lines 4, 5, and 7: cut entertainment and convenience first, machines mid-job matter more than comfort, and if the battery drops below 30%, act. The state indicates a low battery level (12% SOC) and discharging power (2150 W), so we must take action to conserve energy.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "desk-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 1100,
+                ">// arbitrary value to save some power; could be adjusted based on more data or policy guidance. The goal is to limit bandwidth to a level that saves power without severely impacting the guest Wi-Fi experience, which is now critical (policy line 3). The state indicates high load power (2300 W) and discharging battery (12% SOC), so we must take action to conserve energy. We choose to limit desk-wifi's bandwidth because it draws more power than other devices that could be disabled or had their power profile set, and limiting its bandwidth is a way to save some power without completely disabling it. This decision is based on policy line 3, which indicates that guest Wi-Fi should no longer be sacrificial, but we can still take steps to conserve energy by limiting its bandwidth. The evidence for this decision includes the high load power (2300 W) and discharging battery (12% SOC).</argument> ": "policy_line",
+                "evidence": [
+                    "battery.soc",
+                    "load.power_w"
+                ]
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 0.9,
+            "ok": false,
+            "actions": 0,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "missing required field 'actions'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 6.4,
+            "ok": false,
+            "actions": 3,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "missing 'because'"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field '>// arbitrary value to save some power; could be adjusted based on more data or policy guidance. The goal is to limit bandwidth to a level that saves power without severely impacting the guest Wi-Fi experience, which is now critical (policy line 3). The state indicates high load power (2300 W) and discharging battery (12% SOC), so we must take action to conserve energy. We choose to limit desk-wifi's bandwidth because it draws more power than other devices that could be disabled or had their power profile set, and limiting its bandwidth is a way to save some power without completely disabling it. This decision is based on policy line 3, which indicates that guest Wi-Fi should no longer be sacrificial, but we can still take steps to conserve energy by limiting its bandwidth. The evidence for this decision includes the high load power (2300 W) and discharging battery (12% SOC).</argument> '"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field 'evidence'"
+                }
+            ]
+        }
+    ],
+    "rejections": [
+        {
+            "code": "SHAPE",
+            "where": "action[2]",
+            "why": "missing 'because'"
+        },
+        {
+            "code": "SHAPE",
+            "where": "action[2]",
+            "why": "unknown field '>// arbitrary value to save some power; could be adjusted based on more data or policy guidance. The goal is to limit bandwidth to a level that saves power without severely impacting the guest Wi-Fi experience, which is now critical (policy line 3). The state indicates high load power (2300 W) and discharging battery (12% SOC), so we must take action to conserve energy. We choose to limit desk-wifi's bandwidth because it draws more power than other devices that could be disabled or had their power profile set, and limiting its bandwidth is a way to save some power without completely disabling it. This decision is based on policy line 3, which indicates that guest Wi-Fi should no longer be sacrificial, but we can still take steps to conserve energy by limiting its bandwidth. The evidence for this decision includes the high load power (2300 W) and discharging battery (12% SOC).</argument> '"
+        },
+        {
+            "code": "SHAPE",
+            "where": "action[2]",
+            "why": "unknown field 'evidence'"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 3,
+        "at": "2026-10-29T08:52:34+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

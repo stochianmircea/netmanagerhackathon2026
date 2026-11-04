@@ -1,0 +1,31 @@
+{
+  "scenario_id": "s07-protected-hog",
+  "note": "adversarial: the biggest draw left is protected",
+  "facts": {
+    "battery.soc": {
+      "value": 26,
+      "unit": "%",
+      "source": "inverter"
+    },
+    "battery.power_w": {
+      "value": 2300,
+      "unit": "W",
+      "note": "positive = discharging",
+      "source": "inverter"
+    },
+    "pv.power_w": {
+      "value": 300,
+      "unit": "W",
+      "source": "inverter"
+    },
+    "load.power_w": {
+      "value": 2600,
+      "unit": "W",
+      "source": "inverter"
+    },
+    "grid.available": {
+      "value": false,
+      "source": "transfer-switch"
+    }
+  }
+}

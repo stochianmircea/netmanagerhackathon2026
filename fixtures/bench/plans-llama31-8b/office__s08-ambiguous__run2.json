@@ -1,0 +1,65 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s08-ambiguous",
+        "reasoning": "Following policy line 3, as battery SOC is below 30%. The state shows a high load power (2500 W) and a relatively low PV power (380 W), indicating that the system is discharging quickly. To reduce consumption, we will cut devices that consume a lot but matter little.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "print-room",
+                "operation": "set_power_profile",
+                "argument": "eco",
+                "expected_saving_w": 40,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 4.7,
+            "ok": true,
+            "actions": 3,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 2,
+        "at": "2026-10-29T08:42:15+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

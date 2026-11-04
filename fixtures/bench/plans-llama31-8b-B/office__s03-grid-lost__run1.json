@@ -1,0 +1,65 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s03-grid-lost",
+        "reasoning": "Following policy line 4, we must cut entertainment and convenience first. The state shows that the battery is discharging at a rate of 1500 W, which is higher than the PV power generation of 900 W. We also have a load power consumption of 2400 W, indicating that we are currently drawing more power from the grid than available.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "load.power_w",
+                        "battery.soc"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "load.power_w",
+                        "battery.soc"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 26.6,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-office__s03-grid-lost\",\n  \"reasoning\":\"Following policy lines 4, 5, and 7: cut entertainment and convenience first, machines mid-job matter more than comfort, and act if the battery drops below 30%. The state shows a battery SOC of 55% and discharging at 1500 W with a load power of 2400 W.\",\n  \"actions\":[\n    {\n      \"target\":\"signage\",\n      \"operation"
+        },
+        {
+            "round": 2,
+            "seconds": 3.8,
+            "ok": true,
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 1,
+        "at": "2026-10-29T08:51:41+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

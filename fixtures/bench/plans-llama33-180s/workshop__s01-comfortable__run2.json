@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s01-comfortable",
+        "reasoning": "The current battery state of charge is 82%, which is above the threshold of 30%. The system is currently not discharging, as indicated by a power consumption of 0 W. Given this stable condition and following policy line 3, no critical devices need to be touched or adjusted according to their definitions in the policy. Since there are no immediate needs to cut power due to low battery levels or other emergencies outlined in the policy, and considering that guest Wi-Fi is mentioned as sacrificial but not directly applicable here without specific mention of a 'guest Wi-Fi' device among our targets, we do not have actions to take based on the provided state and rules.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 115,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 2,
+        "at": "2026-10-29T04:06:51+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

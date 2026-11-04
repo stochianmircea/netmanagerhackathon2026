@@ -1,0 +1,46 @@
+{
+    "ok": false,
+    "plan": null,
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 26.3,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-office__s06-night\",\n  \"reasoning\":\n    \"Following policy line 3, as battery.soc is below 30% (34%). The load.power_w is 1750 W, which is the same as battery.power_w. This suggests that we are discharging at a rate equal to our power consumption.\",\n  \"actions\":[\n    {\n      \"target\":\"signage\",\n      \"operation\":\"disable\",\n      \"argument\":null,\n      \"ex"
+        },
+        {
+            "round": 2,
+            "seconds": 26.6,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-office__s06-night\",\n  \"reasoning\":\n    \"Following policy line 3: if battery drops below 30%, cut first what consumes a lot and matters little. The state shows the battery is at 34% SOC, but discharging at 1750 W, which means it's dropping below 30%. We need to reduce power consumption.\",\n  \"actions\":[\n    {\n      \"target\":\"signage\",\n      \"operation\":\"d"
+        }
+    ],
+    "rejections": [
+        {
+            "code": "MODEL",
+            "where": null,
+            "why": "the model did not return a JSON object"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-10-30T21:04:22+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

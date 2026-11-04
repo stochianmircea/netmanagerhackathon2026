@@ -1,0 +1,107 @@
+{
+    "ok": false,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s04-below-30",
+        "reasoning": "Following policy lines 4 and 5: cut entertainment and convenience first, machines mid-job matter more than comfort. Battery is at 28% SOC, which is above the threshold for action (policy line 7). However, we should still consider cutting devices to save power.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "load.power_w",
+                        "battery.soc"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "load.power_w",
+                        "battery.soc"
+                    ]
+                }
+            },
+            {
+                "target": "desk-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 1100,
+                ">// assuming a reasonable bandwidth limit for desk wifi (10% of its max power draw) - this is an arbitrary choice and may need to be adjusted based on actual usage patterns or other factors not specified in the problem statement. If you want to avoid making assumptions like this, you could simply leave out the expected_saving_w field for this action, as it's not strictly necessary for validation purposes. However, I've included it here to match the format requested by the validator. In a real-world scenario, you would likely need to gather more information about actual usage patterns and adjust your plan accordingly. - added evidence for policy line 5: ": [
+                    {
+                        "target": "desk-wifi",
+                        "operation": "limit_bandwidth",
+                        "argument": 1100,
+                        "expected_saving_w": 9,
+                        "because": {
+                            "policy_line": 4,
+                            "evidence": [
+                                "load.power_w",
+                                "battery.soc"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 0.9,
+            "ok": false,
+            "actions": 0,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "missing required field 'actions'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 5.9,
+            "ok": false,
+            "actions": 3,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "missing 'because'"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field '>// assuming a reasonable bandwidth limit for desk wifi (10% of its max power draw) - this is an arbitrary choice and may need to be adjusted based on actual usage patterns or other factors not specified in the problem statement. If you want to avoid making assumptions like this, you could simply leave out the expected_saving_w field for this action, as it's not strictly necessary for validation purposes. However, I've included it here to match the format requested by the validator. In a real-world scenario, you would likely need to gather more information about actual usage patterns and adjust your plan accordingly. - added evidence for policy line 5: '"
+                }
+            ]
+        }
+    ],
+    "rejections": [
+        {
+            "code": "SHAPE",
+            "where": "action[2]",
+            "why": "missing 'because'"
+        },
+        {
+            "code": "SHAPE",
+            "where": "action[2]",
+            "why": "unknown field '>// assuming a reasonable bandwidth limit for desk wifi (10% of its max power draw) - this is an arbitrary choice and may need to be adjusted based on actual usage patterns or other factors not specified in the problem statement. If you want to avoid making assumptions like this, you could simply leave out the expected_saving_w field for this action, as it's not strictly necessary for validation purposes. However, I've included it here to match the format requested by the validator. In a real-world scenario, you would likely need to gather more information about actual usage patterns and adjust your plan accordingly. - added evidence for policy line 5: '"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 2,
+        "at": "2026-10-29T08:52:16+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

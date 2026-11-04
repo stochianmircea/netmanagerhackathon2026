@@ -1,0 +1,75 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s06-night",
+        "reasoning": "Following policy line 3, as battery level is below 30% (34% SOC). The load is 1750 W, which is the same as the power being drawn from the battery. We need to cut consumption.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            },
+            {
+                "target": "print-room",
+                "operation": "set_power_profile",
+                "argument": "eco",
+                "expected_saving_w": 40,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 8.5,
+            "ok": false,
+            "actions": 4,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field '# Limiting bandwidth to save as much power as possible while still allowing some functionality. This is a conservative estimate based on the device's original specification and may need adjustment in practice. The actual saving will depend on how the device uses its remaining capacity when limited to this rate. We are doing this because policy line 3, which prioritizes cutting consumption when battery level drops below 30% (34% SOC). Evidence: battery.soc is below 30%. This action should save approximately 101 W of power, but we're only counting the bandwidth limitation itself as a saving, not any potential reduction in load due to reduced usage. The expected saving is therefore set to 9 W, which is the actual power saved by limiting the bandwidth alone, according to the device's specification. This action will be reviewed and adjusted as necessary based on observed effects on system performance and overall energy consumption.'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 5.1,
+            "ok": true,
+            "actions": 3,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 3,
+        "at": "2026-10-29T08:41:04+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

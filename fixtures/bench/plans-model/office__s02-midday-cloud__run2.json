@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s02-midday-cloud",
+        "reasoning": "The battery state of charge is 61%, which is above the threshold of 30% specified in policy line 3. The grid is available and the current power consumption is within manageable levels. Following policy line 2, we could consider adjusting non-critical systems but given the current state, there's no immediate need to cut power to any devices as the battery has sufficient charge and the system is not under stress. Thus, no actions are necessary at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 87.9,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-11-03T23:40:55+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

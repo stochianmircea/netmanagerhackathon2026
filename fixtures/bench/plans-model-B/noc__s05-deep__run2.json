@@ -1,0 +1,68 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s05-deep",
+        "reasoning": "Given the current battery state of charge (SOC) is at 12%, which is below 15%, we must act according to policy line 7. The battery is discharging at a rate of 2150 W, and with the grid unavailable, we need to reduce our load to prolong autonomy. Following policy lines 4 and 5, we prioritize cutting non-essential devices first, such as entertainment and convenience devices, before considering machines mid-job or critical systems.",
+        "actions": [
+            {
+                "target": "media-server",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 180,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available"
+                    ]
+                }
+            },
+            {
+                "target": "lab-switch",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 210,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available"
+                    ]
+                }
+            },
+            {
+                "target": "office-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 1000,
+                "expected_saving_w": 6,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 184.2,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 3,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-11-04T02:13:49+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

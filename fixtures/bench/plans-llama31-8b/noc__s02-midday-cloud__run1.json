@@ -1,0 +1,45 @@
+{
+    "ok": false,
+    "plan": null,
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 26.5,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-noc__s02-midday-cloud\",\n  \"reasoning\":\n    \"Following policy line 3, as battery level is below 30% (61% SOC). The load is high (2200 W), so we need to cut power-hungry devices. Critical stations are never touched, and cameras at the gate and the gate controller must stay alive.\",\n  \"actions\":[\n    {\n      \"target\":\"media-server\",\n      \"operation\":\"disa"
+        },
+        {
+            "round": 2,
+            "seconds": 26.5,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-noc__s02-midday-cloud\",\n  \"reasoning\":\"Following policy line 3: if battery drops below 30%, cut first what consumes a lot and matters little. The state shows the battery is at 61% SOC, but discharging at 1600 W with only 600 W coming from PV. This means we need to reduce load power to prevent further discharge.\",\n  \"actions\":[\n    {\n      \"target\":\"lab-"
+        }
+    ],
+    "rejections": [
+        {
+            "code": "MODEL",
+            "where": null,
+            "why": "the model did not return a JSON object"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 1,
+        "at": "2026-10-29T08:34:29+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

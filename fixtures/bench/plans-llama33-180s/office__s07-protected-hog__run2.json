@@ -1,0 +1,52 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s07-protected-hog",
+        "reasoning": "Following policy line 3, since the battery state of charge (battery.soc) is below 30% at 26%, and we are discharging (battery.power_w is positive), actions need to be taken to reduce power consumption. Given that critical stations are not to be touched as per policy line 4, and guest Wi-Fi being sacrificial as per policy line 2 does not directly apply here but guides us on what can be considered for reduction, we look at other devices for potential savings. The print room and signage are significant consumers and are not marked as critical or never touch.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "battery.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "print-room",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 160,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "battery.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 172.8,
+            "ok": true,
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 2,
+        "at": "2026-10-29T03:51:35+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

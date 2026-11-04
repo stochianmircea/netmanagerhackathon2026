@@ -1,0 +1,52 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s08-ambiguous",
+        "reasoning": "Following policy line 3, since the battery state of charge (battery.soc) is below 30% at 29%, we need to cut devices that consume a lot but matter little. Given the current load and the fact that grid power is not available (grid.available), we must reduce our consumption to prolong autonomy. The coffee-machine and print-room are identified as significant consumers that can be adjusted without compromising critical functions.",
+        "actions": [
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available"
+                    ]
+                }
+            },
+            {
+                "target": "print-room",
+                "operation": "set_power_profile",
+                "argument": "eco",
+                "expected_saving_w": 40,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 143.6,
+            "ok": true,
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 3,
+        "at": "2026-10-29T04:02:46+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

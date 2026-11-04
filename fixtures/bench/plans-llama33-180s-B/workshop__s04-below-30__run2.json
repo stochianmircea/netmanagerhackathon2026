@@ -1,0 +1,52 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s04-below-30",
+        "reasoning": "The battery state of charge is 28%, which is below 30%. Following policy line 7, we need to act. The load power is higher than the available power from the PV and grid, so we need to reduce the load. We will start by cutting entertainment and convenience devices as per policy line 4.",
+        "actions": [
+            {
+                "target": "charger-bank",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 420,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "dust-extractor",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 900,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 134.1,
+            "ok": true,
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 2,
+        "at": "2026-10-29T07:16:02+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

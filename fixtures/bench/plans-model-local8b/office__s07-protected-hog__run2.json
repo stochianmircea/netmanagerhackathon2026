@@ -1,0 +1,66 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s07-protected-hog",
+        "reasoning": "Following policy line 3: if battery drops below 30%, cut first what consumes a lot and matters little. The state shows the battery is at 26% SOC, so we need to reduce power consumption.",
+        "actions": [
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            },
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 26.4,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-office__s07-protected-hog\",\n  \"reasoning\":\"Following policy lines 3 and 4, we need to cut power consumption while keeping critical stations alive. The battery is discharging at a rate of 2300 W, which is above the PV generation of 300 W.\",\n  \"actions\":[\n    {\n      \"target\":\"signage\",\n      \"operation\":\"disable\",\n      \"argument\":null,\n      \"expected_s"
+        },
+        {
+            "round": 2,
+            "seconds": 3.4,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-10-30T21:05:06+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

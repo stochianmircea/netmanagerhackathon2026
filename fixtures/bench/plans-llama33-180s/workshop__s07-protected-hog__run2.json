@@ -1,0 +1,23 @@
+{
+    "ok": false,
+    "plan": null,
+    "rounds": [
+        {
+            "round": 1,
+            "error": "model unreachable: Operation timed out after 180002 milliseconds with 0 bytes received"
+        }
+    ],
+    "rejections": [
+        {
+            "code": "MODEL",
+            "where": null,
+            "why": "model unreachable: Operation timed out after 180002 milliseconds with 0 bytes received"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 2,
+        "at": "2026-10-29T04:49:38+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

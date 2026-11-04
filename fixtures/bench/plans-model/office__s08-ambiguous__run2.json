@@ -1,0 +1,77 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s08-ambiguous",
+        "reasoning": "Following policy line 3, since the battery state of charge (battery.soc) is below 30% at 29%, and we are discharging (battery.power_w is positive), we need to cut what consumes a lot and matters little. Given our current load (load.power_w) exceeds the power we're generating from PV (pv.power_w) and the grid is not available (grid.available is no), conservation is necessary. The autonomy hours are also relatively low at 2.1 hours, indicating a need to conserve energy. Thus, looking at devices that consume a lot but are not critical or sacrificial by policy, we identify potential targets for reduction.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "battery.power_w",
+                        "pv.power_w",
+                        "load.power_w",
+                        "grid.available"
+                    ]
+                }
+            },
+            {
+                "target": "print-room",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 160,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "battery.power_w",
+                        "pv.power_w",
+                        "load.power_w",
+                        "grid.available"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "battery.power_w",
+                        "pv.power_w",
+                        "load.power_w",
+                        "grid.available"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 237.4,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 3,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-11-04T00:37:36+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

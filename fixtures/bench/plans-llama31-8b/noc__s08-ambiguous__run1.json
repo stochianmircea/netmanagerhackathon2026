@@ -1,0 +1,38 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s08-ambiguous",
+        "reasoning": "Following policy line 3, as battery level is below 30% (29%). The load power is high at 2500 W, and the lab switch consumes a lot with 210 W. However, 'limit_bandwidth' is not declared for 'lab-switch', so we cannot take this action.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 2.7,
+            "ok": false,
+            "actions": 1,
+            "rejections": [
+                {
+                    "code": "CAPABILITY",
+                    "where": "action[0]",
+                    "why": "'limit_bandwidth' is not declared for 'lab-switch' (declared: disable)"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 1.9,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 1,
+        "at": "2026-10-29T08:36:29+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

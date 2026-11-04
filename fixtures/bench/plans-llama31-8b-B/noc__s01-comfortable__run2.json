@@ -1,0 +1,45 @@
+{
+    "ok": false,
+    "plan": null,
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 1.2,
+            "ok": false,
+            "actions": 0,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "missing required field 'actions'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 26.5,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n    \"schema_version\":1,\n    \"state_ref\":\"bench-noc__s01-comfortable\",\n    \"reasoning\":\"Following policy lines 4 and 5: cut entertainment and convenience first, machines mid-job matter more than comfort. The battery is at 82% SOC, so no immediate action is required.\",\n    \"actions\":[\n        {\n            \"target\":\"media-server\",\n            \"operation\":\"disable\",\n            \"argument\":null,\n   "
+        }
+    ],
+    "rejections": [
+        {
+            "code": "MODEL",
+            "where": null,
+            "why": "the model did not return a JSON object"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 2,
+        "at": "2026-10-29T08:45:48+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

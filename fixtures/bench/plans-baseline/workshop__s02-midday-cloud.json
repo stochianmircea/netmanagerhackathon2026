@@ -1,0 +1,6 @@
+{
+    "schema_version": 1,
+    "state_ref": "bench-workshop__s02-midday-cloud",
+    "reasoning": "grid is available — the rule does nothing",
+    "actions": []
+}

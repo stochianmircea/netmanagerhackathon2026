@@ -1,0 +1,45 @@
+{
+    "ok": false,
+    "plan": null,
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 1.3,
+            "ok": false,
+            "actions": 0,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "missing required field 'actions'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 26.3,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-noc__s01-comfortable\",\n  \"reasoning\":\"Following policy lines 4, 5, and 6: cut entertainment and convenience first. The battery is at 82% SOC, which is above the threshold for critical action (30%), but below the threshold for CNC and dust extractor shutdown (20%). However, given the current load power of 1900 W and the available grid power, it's reasona"
+        }
+    ],
+    "rejections": [
+        {
+            "code": "MODEL",
+            "where": null,
+            "why": "the model did not return a JSON object"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 1,
+        "at": "2026-10-29T08:45:20+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s06-night",
+        "reasoning": "The battery state of charge is at 34%, which is above the threshold of 30% specified in policy line 3. Given this condition and considering policy lines 2 and 4, there's no immediate need to cut power to any devices since critical systems are protected and the battery has enough charge to sustain operations for a while longer without needing to sacrifice non-critical loads immediately. Thus, no actions are required at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 80.3,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 2,
+        "at": "2026-10-29T04:41:57+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

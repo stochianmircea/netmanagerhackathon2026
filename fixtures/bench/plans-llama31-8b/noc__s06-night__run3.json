@@ -1,0 +1,38 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s06-night",
+        "reasoning": "Following policy line 3, as battery SOC is below 30% (34%). The load is 1750 W, which is a lot. Guest Wi-Fi consumes the least amount of power and matters little.",
+        "actions": [
+            {
+                "target": "guest-wifi",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 120,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 2.3,
+            "ok": true,
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 3,
+        "at": "2026-10-29T08:35:48+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

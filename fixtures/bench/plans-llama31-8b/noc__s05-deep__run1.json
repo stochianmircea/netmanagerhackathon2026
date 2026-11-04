@@ -1,0 +1,90 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s05-deep",
+        "reasoning": "Following policy lines 3 and 4, we must cut power to devices that consume a lot but matter little. However, critical stations are never touched.",
+        "actions": [
+            {
+                "target": "media-server",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 180,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "lab-switch",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 210,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "office-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 500,
+                "expected_saving_w": 6,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "guest-wifi",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 120,
+                "because": {
+                    "policy_line": 2,
+                    "evidence": [
+                        "grid.available"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 8.8,
+            "ok": false,
+            "actions": 4,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field '# arbitrary choice; policy doesn't specify a value for this operation on this device. If you want to use a different number, please change it here: 1000 kbit/s (1 Mbit/s). The validator will check that the chosen value is not greater than what the device draws (95 W) divided by the maximum power_w of any PV panel in the system (150 W), which is approximately 63.2% of its rated capacity, so it should be safe to choose a number up to about 600 kbit/s without exceeding that limit. However, if you want to be more conservative, you can use a smaller value: 500 kbit/s, for example, would save about 6 W, which is roughly the same as disabling the device entirely but with less impact on users' productivity. The choice of number here is arbitrary and should be reviewed by a human before approval.'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 6.3,
+            "ok": true,
+            "actions": 4,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 1,
+        "at": "2026-10-29T08:35:30+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

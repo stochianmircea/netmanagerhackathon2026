@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s03-grid-lost",
+        "reasoning": "The battery state of charge is at 55%, which is above the threshold of 30% specified in policy line 3. The grid is not available and the system is discharging at a rate of 1500 W, but there's no immediate need to cut power consumption according to the given policies since the autonomy hours are still at 17.6 hours. Following policy lines 1 and 4, critical devices such as cameras at the gate, the gate controller, and critical stations must remain operational. Given that the current state does not necessitate cutting power due to being above the 30% threshold and considering other constraints, no actions are required at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 119.1,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 3,
+        "at": "2026-10-29T04:21:00+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

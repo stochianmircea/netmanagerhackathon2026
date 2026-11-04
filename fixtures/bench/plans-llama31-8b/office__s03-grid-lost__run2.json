@@ -1,0 +1,65 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s03-grid-lost",
+        "reasoning": "Following policy line 3: if battery drops below 30%, cut first what consumes a lot and matters little. The state shows the battery is at 55% SOC, but discharging at 1500 W with only 900 W coming from PV. This means we need to reduce load by 600 W. We will disable devices that consume a lot and matter little.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 6.3,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-office__s03-grid-lost\",\n  \"reasoning\":\n    \"Following policy lines 3 and 4, we need to cut power consumption while keeping critical stations alive. The battery is discharging at 1500 W with a SOC of 55%, which means we have about 5.5 hours of autonomy left.\",\n  \"actions\":[\n    {\n      \"target\":\"signage\",\n      \"operation\":\"disable\",\n      \"argument\":nul"
+        },
+        {
+            "round": 2,
+            "seconds": 3.9,
+            "ok": true,
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 2,
+        "at": "2026-10-29T08:38:28+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

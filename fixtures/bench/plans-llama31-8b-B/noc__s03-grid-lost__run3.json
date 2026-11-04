@@ -1,0 +1,90 @@
+{
+    "ok": false,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s03-grid-lost",
+        "reasoning": "Following policy lines 4, 5, and 7: cut entertainment and convenience first, machines mid-job matter more than comfort, and if the battery drops below 30%, act. The state indicates a battery SOC of 55% and discharging at 1500 W, with a load power of 2400 W.",
+        "actions": [
+            {
+                "target": "media-server",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 180,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "office-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 10000,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "lab-switch",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 210,
+                "because": {
+                    "policy_line": 5,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 1.1,
+            "ok": false,
+            "actions": 0,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "missing required field 'actions'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 5,
+            "ok": false,
+            "actions": 3,
+            "rejections": [
+                {
+                    "code": "ARITHMETIC",
+                    "where": "action[1]",
+                    "why": "claims 95 W from 'limit_bandwidth' on 'office-wifi', but the owner measured that operation as worth 6 W"
+                }
+            ]
+        }
+    ],
+    "rejections": [
+        {
+            "code": "ARITHMETIC",
+            "where": "action[1]",
+            "why": "claims 95 W from 'limit_bandwidth' on 'office-wifi', but the owner measured that operation as worth 6 W"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 3,
+        "at": "2026-10-29T08:46:48+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

@@ -1,0 +1,43 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s04-below-30",
+        "reasoning": "The battery state of charge is 28%, which is below 30%. Following policy line 7, we need to act. The load power is 2550 W and the PV power is 410 W, resulting in a net discharge of 2140 W from the battery. To reduce the load, we will cut entertainment and convenience first as per policy line 4. We will disable the media server to save power.",
+        "actions": [
+            {
+                "target": "media-server",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 180,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w",
+                        "pv.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 122.7,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-11-04T02:03:21+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

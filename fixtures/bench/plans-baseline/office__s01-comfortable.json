@@ -1,0 +1,6 @@
+{
+    "schema_version": 1,
+    "state_ref": "bench-office__s01-comfortable",
+    "reasoning": "grid is available — the rule does nothing",
+    "actions": []
+}

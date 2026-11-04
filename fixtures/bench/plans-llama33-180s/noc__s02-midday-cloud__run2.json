@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s02-midday-cloud",
+        "reasoning": "The battery's state of charge is 61%, which is above the threshold of 30%. The load power is higher than the combined power from the PV and grid. Following policy line 3, we should cut what consumes a lot and matters little when the battery drops below 30%, but since it's not the case here, no actions are needed. Policy line 2 makes guest Wi-Fi sacrificial, but with the current state, there is no need to touch it.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 94,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 2,
+        "at": "2026-10-29T02:20:09+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

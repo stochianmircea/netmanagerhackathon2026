@@ -1,0 +1,42 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s07-protected-hog",
+        "reasoning": "Following policy line 3, since the battery state of charge (battery.soc) is below 30% at 26%, and we are discharging (battery.power_w is positive), we need to cut what consumes a lot and matters little. Given our current load (load.power_w) exceeds the power we generate from the PV (pv.power_w) and the grid is not available (grid.available is no), conservation is necessary. The autonomy hours are also relatively low at 3.6 hours, indicating a need to conserve energy. Thus, looking at the devices, guest Wi-Fi, being sacrificial as per policy line 2, should be considered first for reduction.",
+        "actions": [
+            {
+                "target": "guest-wifi",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 120,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 156.2,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-11-03T23:15:51+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

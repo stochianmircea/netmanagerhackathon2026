@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s02-midday-cloud",
+        "reasoning": "The current battery state of charge is 61%, and the system is discharging at 1600 W. According to policy line 7, no action is required until the battery drops below 30%. Since the current state does not trigger any of the policy lines that require cutting power, no actions are necessary. The grid is available, and the autonomy hours are 5.7 h, which suggests that there is no immediate need for power reduction.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 91.1,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-11-04T02:44:29+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

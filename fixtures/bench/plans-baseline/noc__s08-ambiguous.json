@@ -1,0 +1,31 @@
+{
+    "schema_version": 1,
+    "state_ref": "bench-noc__s08-ambiguous",
+    "reasoning": "battery 29% below 30% and no grid; cut down the written order until 375 W was covered",
+    "actions": [
+        {
+            "target": "guest-wifi",
+            "operation": "disable",
+            "expected_saving_w": 120,
+            "because": {
+                "rule": "cut_order position 1"
+            }
+        },
+        {
+            "target": "media-server",
+            "operation": "disable",
+            "expected_saving_w": 180,
+            "because": {
+                "rule": "cut_order position 2"
+            }
+        },
+        {
+            "target": "lab-switch",
+            "operation": "disable",
+            "expected_saving_w": 210,
+            "because": {
+                "rule": "cut_order position 3"
+            }
+        }
+    ]
+}

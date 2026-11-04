@@ -1,0 +1,40 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s05-deep",
+        "reasoning": "Following policy line 3, since the battery state of charge is at 12% (battery.soc), which is below the 30% threshold, and we are discharging at a rate of 2150 W (battery.power_w) with limited power input from the PV (pv.power_w), we need to cut what consumes a lot and matters little. Given that guest Wi-Fi is considered sacrificial as per policy line 2, it's logical to start by disabling it to save power.",
+        "actions": [
+            {
+                "target": "guest-wifi",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 120,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "pv.power_w",
+                        "battery.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 172.1,
+            "ok": true,
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 2,
+        "at": "2026-10-29T02:40:36+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

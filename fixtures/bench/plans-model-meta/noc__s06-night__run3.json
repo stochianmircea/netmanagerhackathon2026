@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s06-night",
+        "reasoning": "Battery SoC is 34% which is above the 30% threshold in policy line 3, so no low-battery cuts are triggered. Although grid is unavailable and battery is discharging, autonomy remains 6.2h, so Guest Wi-Fi noted as sacrificial in line 2 does not need to be cut now. Gate devices per line 1 and critical station per line 4 remain untouched.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 8.7,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 3,
+        "at": "2026-10-30T20:22:42+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

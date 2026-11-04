@@ -1,0 +1,41 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s08-ambiguous",
+        "reasoning": "Battery SoC is 29% which is below the 30% threshold in policy line 3, with grid unavailable and battery discharging. Per policy line 2 Guest Wi-Fi is sacrificial so it is cut first. Gate devices per line 1 and critical station per line 4 are never touched, and other high-draw devices are left on because their importance is ambiguous.",
+        "actions": [
+            {
+                "target": "guest-wifi",
+                "operation": "disable",
+                "expected_saving_w": 120,
+                "because": {
+                    "policy_line": 2,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 13,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 3,
+        "at": "2026-10-30T20:24:29+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

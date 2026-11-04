@@ -1,0 +1,55 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s08-ambiguous",
+        "reasoning": "Following policy lines 3 and 4, we identified devices to cut power to in order to save energy. Critical stations (alarm panel, gate camera, core switch) are never touched.",
+        "actions": [
+            {
+                "target": "dust-extractor",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 900,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "charger-bank",
+                "operation": "set_power_profile",
+                "argument": "eco",
+                "expected_saving_w": 160,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "pv.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 3.4,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 3,
+        "at": "2026-10-30T21:07:49+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

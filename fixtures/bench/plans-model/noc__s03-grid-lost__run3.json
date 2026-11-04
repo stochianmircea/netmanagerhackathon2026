@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s03-grid-lost",
+        "reasoning": "The battery state of charge is at 55%, which is above the threshold of 30% specified in policy line 3. The grid is not available and the system is discharging at a rate of 1500 W, as indicated by facts battery.soc, grid.available, and battery.power_w. Following policy line 1 and 4, critical devices such as gate-camera, gate-controller, core-switch, and critical-station must not be touched. Given that the current state does not necessitate cutting power to any non-critical devices based on the provided policies and measured state, no actions are required at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 108.6,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 3,
+        "at": "2026-11-03T22:47:28+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

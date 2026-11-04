@@ -1,0 +1,87 @@
+{
+    "ok": false,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s01-comfortable",
+        "reasoning": "Following policy lines 4, 5, and 6: cut entertainment and convenience first, machines mid-job matter more than comfort, so leave the CNC and the dust extractor for last. The battery is at 82% SOC, which is above 20%, but we should still consider cutting non-essential devices to conserve energy.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "load.power_w",
+                        "1900 W"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "load.power_w",
+                        "1900 W"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 1.4,
+            "ok": false,
+            "actions": 0,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "missing required field 'actions'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 3.9,
+            "ok": false,
+            "actions": 2,
+            "rejections": [
+                {
+                    "code": "GROUNDING",
+                    "where": "action[0]",
+                    "why": "cites '1900 W' as evidence, but there is no such fact in the state"
+                },
+                {
+                    "code": "GROUNDING",
+                    "where": "action[1]",
+                    "why": "cites '1900 W' as evidence, but there is no such fact in the state"
+                }
+            ]
+        }
+    ],
+    "rejections": [
+        {
+            "code": "GROUNDING",
+            "where": "action[0]",
+            "why": "cites '1900 W' as evidence, but there is no such fact in the state"
+        },
+        {
+            "code": "GROUNDING",
+            "where": "action[1]",
+            "why": "cites '1900 W' as evidence, but there is no such fact in the state"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 1,
+        "at": "2026-10-29T08:50:17+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

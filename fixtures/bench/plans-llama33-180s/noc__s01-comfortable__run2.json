@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s01-comfortable",
+        "reasoning": "The battery's state of charge is 82%, which is above the threshold of 30%. The system is currently not discharging, as indicated by a power consumption of 0 W. Given this comfortable state and following policy line 1, no actions are necessary to ensure critical devices like cameras at the gate and the gate controller stay alive. Policy lines 2, 3, and 4 do not apply in this scenario because there is no need to cut power due to a low battery state or prioritize based on consumption and importance since the system is operating within safe parameters.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 102.2,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 2,
+        "at": "2026-10-29T02:13:45+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

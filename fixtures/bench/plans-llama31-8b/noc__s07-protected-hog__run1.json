@@ -1,0 +1,52 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s07-protected-hog",
+        "reasoning": "Following policy lines 3 and 2, we need to cut power consumption to preserve battery life. Guest Wi-Fi is sacrificial.",
+        "actions": [
+            {
+                "target": "guest-wifi",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 120,
+                "because": {
+                    "policy_line": 2,
+                    "evidence": [
+                        "battery.soc",
+                        "battery.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "media-server",
+                "operation": "set_power_profile",
+                "argument": "eco",
+                "expected_saving_w": 55,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 3.4,
+            "ok": true,
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 1,
+        "at": "2026-10-29T08:35:52+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

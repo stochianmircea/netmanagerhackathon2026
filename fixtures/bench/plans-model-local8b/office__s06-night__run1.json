@@ -1,0 +1,41 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s06-night",
+        "reasoning": "Following policy line 3: if battery drops below 30%, cut first what consumes a lot and matters little. The battery is at 34% SOC, so no action is needed.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 26.5,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-office__s06-night\",\n  \"reasoning\":\n    \"Following policy line 3, as battery level is below 30% (34% SOC). The load power is 1750 W, which is the same as the battery's discharge rate. This suggests that we need to cut back on non-essential loads.\",\n  \"actions\":[\n    {\n      \"target\":\"signage\",\n      \"operation\":\"disable\",\n      \"argument\":null,\n      \"ex"
+        },
+        {
+            "round": 2,
+            "seconds": 1.4,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-10-30T21:03:29+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s06-night",
+        "reasoning": "Battery SoC is 34%, which is above the 30% threshold in policy line 3, so no low-battery cuts are required. Policy line 2 refers to Guest Wi-Fi and line 1 to gate cameras/controller, neither of which appear in the device list, and line 4 forbids touching critical stations. Nothing needs cutting.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 5.2,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 2,
+        "at": "2026-10-30T20:27:31+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

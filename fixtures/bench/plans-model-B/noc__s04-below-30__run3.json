@@ -1,0 +1,42 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s04-below-30",
+        "reasoning": "The battery state of charge is 28%, which is below 30%. Following policy line 7, we need to act. Since the grid is not available and the autonomy hours are limited, we will prioritize cutting non-essential devices. Policy line 4 suggests cutting entertainment and convenience first. The media server is one such device that can be disabled to save power.",
+        "actions": [
+            {
+                "target": "media-server",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 180,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 103.4,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 3,
+        "at": "2026-11-04T02:07:30+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

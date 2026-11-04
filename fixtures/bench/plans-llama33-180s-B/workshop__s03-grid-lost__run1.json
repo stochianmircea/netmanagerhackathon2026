@@ -1,0 +1,52 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s03-grid-lost",
+        "reasoning": "The current battery state of charge is 55%, and the grid is not available. Following policy line 4, we should cut entertainment and convenience first. Since the battery power is discharging at 1500 W and the load power is 2400 W, we need to reduce the load to balance the energy consumption. The measured state shows that the autonomy hours are still relatively high at 17.6 hours, so we don't need to take drastic measures yet.",
+        "actions": [
+            {
+                "target": "charger-bank",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 420,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "dust-extractor",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 900,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 163.3,
+            "ok": true,
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 1,
+        "at": "2026-10-29T07:07:36+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

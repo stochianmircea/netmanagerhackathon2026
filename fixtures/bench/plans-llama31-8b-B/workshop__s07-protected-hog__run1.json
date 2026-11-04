@@ -1,0 +1,76 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s07-protected-hog",
+        "reasoning": "Following policy lines 4 and 5: cut entertainment and convenience first, machines mid-job matter more than comfort. Battery is at 26% SOC, which is above the threshold for critical action (30%), but below the threshold for full shutdown (15%).",
+        "actions": [
+            {
+                "target": "charger-bank",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 420,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            },
+            {
+                "target": "shop-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 7000,
+                "expected_saving_w": 7,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "load.power_w",
+                        "battery.soc"
+                    ]
+                }
+            },
+            {
+                "target": "cnc",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 650,
+                "because": {
+                    "policy_line": 5,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 1.1,
+            "ok": false,
+            "actions": 0,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "missing required field 'actions'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 3.6,
+            "ok": true,
+            "actions": 3,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 1,
+        "at": "2026-10-29T08:57:12+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

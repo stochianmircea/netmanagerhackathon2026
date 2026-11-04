@@ -1,0 +1,68 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s01-comfortable",
+        "reasoning": "Following policy lines 3 and 4, we observed that the battery is discharging (battery.power_w = 0 W) and has a SOC of 82% (battery.soc = 82%). Critical stations like badge-reader and fire-panel must never be touched. We also noted that guest Wi-Fi is sacrificial, but it's not relevant to this situation.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "battery.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "battery.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "print-room",
+                "operation": "set_power_profile",
+                "argument": "eco",
+                "expected_saving_w": 40,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "battery.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 4.9,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 3,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-10-30T20:59:17+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

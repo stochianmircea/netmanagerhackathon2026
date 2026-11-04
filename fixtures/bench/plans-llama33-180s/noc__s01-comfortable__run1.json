@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s01-comfortable",
+        "reasoning": "The battery's state of charge is at 82%, which is above the threshold of 30% specified in policy line 3. The system is currently not discharging as indicated by battery.power_w being 0 W and pv.power_w exceeding load.power_w, showing that there is no immediate need to cut power consumption according to policy line 3. Following policy lines 1 and 4, critical devices such as cameras at the gate, the gate controller, and critical stations are not to be touched. Given the current state, where the battery is charging and there's no immediate need to reduce load due to sufficient power availability from the grid and PV, no actions are necessary at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 160.5,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 1,
+        "at": "2026-10-29T02:12:03+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

@@ -1,0 +1,80 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s04-below-30",
+        "reasoning": "Following policy lines 3 and 4, we must cut power-hungry devices that matter little. The battery is at 28% SOC, so we need to act quickly.",
+        "actions": [
+            {
+                "target": "dust-extractor",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 900,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            },
+            {
+                "target": "charger-bank",
+                "operation": "set_power_profile",
+                "argument": "eco",
+                "expected_saving_w": 160,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            },
+            {
+                "target": "shop-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 7000,
+                "expected_saving_w": 7,
+                "because": {
+                    "policy_line": 2,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 6.2,
+            "ok": false,
+            "actions": 3,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "missing 'because'"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field '>// 7.5 kbit/s is a reasonable limit for guest Wi-Fi when power is scarce. This is not explicitly stated in the policy, but it's implied by line 2 and our goal of saving as much power as possible while still keeping critical systems online. We're assuming that 85 W is the maximum power consumption of this device, so we can't save more than 7 W by limiting bandwidth. However, since this is a sacrificial system (policy line 2), we should try to limit its impact on the grid if at all possible. Fact id '"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 5,
+            "ok": true,
+            "actions": 3,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 3,
+        "at": "2026-10-29T08:44:06+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

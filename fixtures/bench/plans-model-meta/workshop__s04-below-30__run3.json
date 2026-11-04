@@ -1,0 +1,56 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s04-below-30",
+        "reasoning": "Battery SoC is 28% which is below the 30% threshold, with grid unavailable and discharging, so policy line 3 applies to cut high-use low-importance loads first. I disable the dust extractor as the largest deferrable load and reduce the charger bank to eco. Per line 1 I leave gate-camera untouched, per line 2 shop-wifi is not guest wifi so I leave it alone, per line 4 I leave critical CNC and never-touch stations alone.",
+        "actions": [
+            {
+                "target": "dust-extractor",
+                "operation": "disable",
+                "expected_saving_w": 900,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available",
+                        "load.power_w",
+                        "battery.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "charger-bank",
+                "operation": "set_power_profile",
+                "argument": "eco",
+                "expected_saving_w": 160,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 36.9,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 3,
+        "at": "2026-10-30T20:31:43+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

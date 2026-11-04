@@ -1,0 +1,68 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s01-comfortable",
+        "reasoning": "Following policy line 3, since battery drops below 30% (82% SOC is above 30%, but power_w is positive and load.power_w > pv.power_w). Critical stations are never touched.",
+        "actions": [
+            {
+                "target": "dust-extractor",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 900,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w",
+                        "pv.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "charger-bank",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 420,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w",
+                        "pv.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "cnc",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 650,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w",
+                        "pv.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 4.6,
+            "ok": true,
+            "actions": 3,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 3,
+        "at": "2026-10-29T08:42:55+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

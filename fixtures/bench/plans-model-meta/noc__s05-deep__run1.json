@@ -1,0 +1,69 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s05-deep",
+        "reasoning": "Battery SoC is 12% which is below the 30% threshold in policy line 3, with grid unavailable and only 1.8h autonomy. Per line 2 Guest Wi-Fi is sacrificial so it is disabled first. Per line 3 the largest non-critical loads are cut next: lab-switch and media-server. Gate camera/controller and critical station are left untouched per lines 1 and 4.",
+        "actions": [
+            {
+                "target": "guest-wifi",
+                "operation": "disable",
+                "expected_saving_w": 120,
+                "because": {
+                    "policy_line": 2,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available",
+                        "autonomy.hours"
+                    ]
+                }
+            },
+            {
+                "target": "lab-switch",
+                "operation": "disable",
+                "expected_saving_w": 210,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w",
+                        "battery.power_w",
+                        "grid.available"
+                    ]
+                }
+            },
+            {
+                "target": "media-server",
+                "operation": "disable",
+                "expected_saving_w": 180,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w",
+                        "grid.available"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 13.8,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 3,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 1,
+        "at": "2026-10-30T20:21:37+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

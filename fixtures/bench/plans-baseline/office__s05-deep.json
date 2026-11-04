@@ -1,0 +1,31 @@
+{
+    "schema_version": 1,
+    "state_ref": "bench-office__s05-deep",
+    "reasoning": "battery 12% below 30% and no grid; cut down the written order until 345 W was covered",
+    "actions": [
+        {
+            "target": "signage",
+            "operation": "disable",
+            "expected_saving_w": 240,
+            "because": {
+                "rule": "cut_order position 1"
+            }
+        },
+        {
+            "target": "coffee-machine",
+            "operation": "disable",
+            "expected_saving_w": 95,
+            "because": {
+                "rule": "cut_order position 2"
+            }
+        },
+        {
+            "target": "print-room",
+            "operation": "disable",
+            "expected_saving_w": 160,
+            "because": {
+                "rule": "cut_order position 3"
+            }
+        }
+    ]
+}

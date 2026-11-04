@@ -1,0 +1,31 @@
+{
+  "scenario_id": "s06-night",
+  "note": "night, no production at all",
+  "facts": {
+    "battery.soc": {
+      "value": 34,
+      "unit": "%",
+      "source": "inverter"
+    },
+    "battery.power_w": {
+      "value": 1750,
+      "unit": "W",
+      "note": "positive = discharging",
+      "source": "inverter"
+    },
+    "pv.power_w": {
+      "value": 0,
+      "unit": "W",
+      "source": "inverter"
+    },
+    "load.power_w": {
+      "value": 1750,
+      "unit": "W",
+      "source": "inverter"
+    },
+    "grid.available": {
+      "value": false,
+      "source": "transfer-switch"
+    }
+  }
+}

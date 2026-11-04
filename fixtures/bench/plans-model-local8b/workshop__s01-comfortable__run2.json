@@ -1,0 +1,55 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s01-comfortable",
+        "reasoning": "Following policy lines 3 and 4, we observed that the battery is discharging at a rate of 1900 W. Critical stations (alarm panel, gate camera, core switch) are never touched, so we will focus on disabling non-critical devices to conserve power.",
+        "actions": [
+            {
+                "target": "dust-extractor",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 900,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.power_w",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "charger-bank",
+                "operation": "set_power_profile",
+                "argument": "eco",
+                "expected_saving_w": 160,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "pv.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 3.7,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-10-30T21:05:56+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

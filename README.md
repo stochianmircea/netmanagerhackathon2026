@@ -5,9 +5,20 @@ Meta Global AI Developer Hackathon 2026 · Startup Track · **Push the Frontier*
 An agent that reads a real solar installation, compiles a policy **written in plain English**
 into concrete network actions, and refuses on its own to touch what must stay alive.
 
-The policy is compiled by **Llama 3.3, running on our own hardware** through Ollama — no cloud
-call, no site data leaving the building. The model proposes and argues; code decides what may
-be touched at all.
+The policy is compiled by a **Meta model**, and the project runs two roads on purpose:
+
+- **Local, and the default** — Llama open weights on our own hardware through Ollama. No cloud
+  call, no site data leaving the building. A plan that decides what to switch off should stay
+  compilable when the network is down.
+- **Hosted** — `muse-spark-1.3` through Meta Model API, with `--furnizor=meta`. On this road
+  the state of the installation **does** leave the building. That is a real trade, and it is
+  named here rather than buried.
+
+What each road actually produced is in [`docs/comparison.md`](docs/comparison.md): 24 states ×
+3 runs on each, with every plan recording which road and which model made it.
+
+The model proposes and argues; code decides what may be touched at all. Swapping the model
+changes the quality of the proposal and nothing about the guarantee.
 
 ---
 
@@ -20,14 +31,21 @@ be touched at all.
 - [x] `src/validator.php` — the brake: the never-touch list is enforced **in code**,
       not asked for in the prompt. A plan naming a protected target is rejected whole.
 - [x] `src/collector.php` — reads the live inverter state
-- [x] `src/compiler.php` — policy in English + state → an argued plan, via
-      **Llama 3.3 running on our own hardware** (Ollama), with one code-driven
-      correction round: the validator's rejections go back to the model exactly once,
-      and a second failure is a refusal, not a third attempt
+- [x] `src/compiler.php` — policy in English + state → an argued plan, on either road:
+      **Llama open weights on our own hardware** (Ollama, the default) or **`muse-spark-1.3`
+      through Meta Model API** (`--furnizor=meta`). Every plan records which road and which
+      model made it, so a recorded set cannot misreport its own origin.
+      One code-driven correction round: the validator's rejections go back to the model
+      exactly once, and a second failure is a refusal, not a third attempt
 - [x] `src/executor.php` — applies the approved plan through the RouterOS API,
       bound to the fingerprint of the plan that was approved
 - [x] `src/journal.php` — what was proposed, what was approved, what ran —
       and every action separately, including the ones that failed
+- [x] `policy/adversarial-policy.md` + `tools/proba_frana.php` — a policy written to break
+      the rules on purpose, and a tool that shows the refusal. `docs/comparison.md` reports
+      zero safety violations across 144 runs, which is as much a gap as a result: no model
+      ever tried, so the most important refusal was never seen working. This shows it,
+      with or without a model's cooperation.
 - [x] `policy/example-policy.md` — the English policy the model compiles
 - [x] `fixtures/sample-state.json` — anonymised state, so judges can run this
       without our hardware
@@ -115,7 +133,7 @@ block for it — the exact request to send:
 ```json
 "disable": { "saves_w": 120,
              "apply": { "method": "POST",
-                        "url": "https://10.0.0.1/rest/interface/wireless/set",
+                        "url": "https://192.0.2.1/rest/interface/wireless/set",
                         "body": { "numbers": "{{target}}", "disabled": "yes" },
                         "user_env": "ROUTEROS_USER", "pass_env": "ROUTEROS_PASSWORD" } }
 ```
@@ -145,8 +163,8 @@ php tools/freshen.php fixtures/sample-state.json > /tmp/state.json
 php src/executor.php --plan=fixtures/plan-accepted.json --state=/tmp/state.json \
                      --site=config/site.example.json
 # DRY RUN — nothing was sent. Plan fingerprint: 855daf45891523a4
-#   disable guest-wifi    would send: POST https://10.0.0.1/rest/interface/wireless/set
-#   disable lab-switch    would send: POST https://10.0.0.1/rest/interface/ethernet/poe/set
+#   disable guest-wifi    would send: POST https://192.0.2.1/rest/interface/wireless/set
+#   disable lab-switch    would send: POST https://192.0.2.1/rest/interface/ethernet/poe/set
 
 php src/executor.php --plan=fixtures/plan-accepted.json --state=fixtures/sample-state.json \
                      --site=config/site.example.json

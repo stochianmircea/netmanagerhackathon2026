@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s06-night",
+        "reasoning": "The battery state of charge is at 34%, which is above the threshold of 30% specified in policy line 3. Given this, there's no immediate need to cut power consumption based on the battery level alone. However, since the system is discharging (battery.power_w = 1750 W) and not charging (pv.power_w = 0 W), with no grid available (grid.available = no), it's essential to consider power conservation without compromising critical systems. Following policy line 2, which identifies Guest Wi-Fi as sacrificial, we can consider reducing its power consumption. Policy line 1 and the [NEVER TOUCH] designations for certain devices ensure that critical components like cameras at the gate and the gate controller remain unaffected.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 127.4,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-11-03T23:11:39+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

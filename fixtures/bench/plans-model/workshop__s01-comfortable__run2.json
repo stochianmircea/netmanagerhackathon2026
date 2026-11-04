@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s01-comfortable",
+        "reasoning": "The battery's state of charge is at 82%, which is above the threshold of 30% specified in policy line 3. The system is currently not discharging, as indicated by a battery power of 0 W and a positive grid availability. Given these conditions, there are no devices that need to be cut off according to the policy. Policy lines 1 and 4 ensure critical systems like cameras at the gate and core components remain untouched. Since the system is currently within safe operational parameters and there's no immediate need to reduce power consumption based on the given state, no actions are necessary.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 105.7,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-11-04T00:46:08+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

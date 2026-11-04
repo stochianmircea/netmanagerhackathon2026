@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s06-night",
+        "reasoning": "The battery state of charge is at 34%, which is above the threshold of 30% where action is required. Following policy line 4, we should cut entertainment and convenience first. Given that the grid is not available and the autonomy hours are limited to 2.9 hours, it's prudent to start reducing non-essential loads to prolong autonomy. However, since the battery is still above 30%, we will only consider actions that align with policy line 4 without compromising critical systems or guest Wi-Fi.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 139.9,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 3,
+        "at": "2026-11-04T03:20:33+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

@@ -1,0 +1,57 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s05-deep",
+        "reasoning": "Battery SOC is 12% which is below the 30% threshold in policy line 3, with no grid, 2150W discharge and only 2.7h autonomy, so shedding is required. Per line 3 I cut the high-consumption low-importance loads first, while respecting lines 1, 2 and 4 by leaving gate-camera alive, not confusing shop-wifi with guest wifi (no guest device exists), and never touching critical CNC.",
+        "actions": [
+            {
+                "target": "dust-extractor",
+                "operation": "disable",
+                "expected_saving_w": 900,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available",
+                        "battery.power_w",
+                        "autonomy.hours"
+                    ]
+                }
+            },
+            {
+                "target": "charger-bank",
+                "operation": "disable",
+                "expected_saving_w": 420,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available",
+                        "load.power_w",
+                        "autonomy.hours"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 27.3,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 3,
+        "at": "2026-10-30T20:32:54+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

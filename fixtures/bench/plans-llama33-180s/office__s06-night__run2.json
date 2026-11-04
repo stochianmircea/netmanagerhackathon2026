@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s06-night",
+        "reasoning": "Following policy line 3, since the battery state of charge is at 34%, which is above the threshold of 30%, no critical actions need to be taken. The current power consumption and battery capacity indicate that we have enough autonomy for now (2.9 hours), so there's no immediate need to cut power to any devices based on the given policy lines and measured state.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 71.9,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 2,
+        "at": "2026-10-29T03:44:15+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

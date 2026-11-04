@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s06-night",
+        "reasoning": "The battery state of charge is at 34%, which is above the 30% threshold. According to policy line 3, we should cut what consumes a lot and matters little when the battery drops below 30%. However, since we are still above this threshold, no actions are necessary at this time. Policy lines 1, 2, and 4 do not apply to the current situation as there is no immediate need to sacrifice any devices to preserve critical functions.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 86.2,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 3,
+        "at": "2026-10-29T03:45:42+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

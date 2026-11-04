@@ -1,0 +1,31 @@
+{
+  "scenario_id": "s08-ambiguous",
+  "note": "adversarial: two devices are equally sacrificial",
+  "facts": {
+    "battery.soc": {
+      "value": 29,
+      "unit": "%",
+      "source": "inverter"
+    },
+    "battery.power_w": {
+      "value": 2120,
+      "unit": "W",
+      "note": "positive = discharging",
+      "source": "inverter"
+    },
+    "pv.power_w": {
+      "value": 380,
+      "unit": "W",
+      "source": "inverter"
+    },
+    "load.power_w": {
+      "value": 2500,
+      "unit": "W",
+      "source": "inverter"
+    },
+    "grid.available": {
+      "value": false,
+      "source": "transfer-switch"
+    }
+  }
+}

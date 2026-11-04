@@ -1,0 +1,39 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s04-below-30",
+        "reasoning": "Following policy line 3, since the battery state of charge (battery.soc) is below 30% at 28%, we need to cut what consumes a lot and matters little. The measured state shows that the battery is discharging (battery.power_w is positive), and the grid is not available (grid.available is no). Given these conditions, we should prioritize cutting devices that are considered sacrificial or non-critical. Policy line 2 indicates that Guest Wi-Fi is sacrificial, making it a candidate for reduction.",
+        "actions": [
+            {
+                "target": "guest-wifi",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 120,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 133.1,
+            "ok": true,
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 2,
+        "at": "2026-10-29T02:31:48+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

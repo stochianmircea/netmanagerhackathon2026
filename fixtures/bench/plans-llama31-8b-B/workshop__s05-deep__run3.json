@@ -1,0 +1,84 @@
+{
+    "ok": false,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s05-deep",
+        "reasoning": "Following policy lines 4 and 7: cut entertainment and convenience first, and act below 15% battery. The state shows a low battery level (12%) and high load power (2300 W), indicating the need for immediate action.",
+        "actions": [
+            {
+                "target": "charger-bank",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 420,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            },
+            {
+                "target": "shop-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 70000,
+                "><!-- kbit/s, assuming a reasonable value for guest Wi-Fi bandwidth limit. This is an educated guess and may need to be adjusted based on actual usage patterns. --></argument>        ": "expected_saving_w"
+            },
+            "because"
+        ],
+        "policy_line": 3,
+        "evidence": [
+            "battery.soc"
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 0.9,
+            "ok": false,
+            "actions": 0,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "missing required field 'actions'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 3.5,
+            "ok": false,
+            "actions": 3,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "unknown field 'policy_line' — the plan may not invent fields"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "unknown field 'evidence' — the plan may not invent fields"
+                }
+            ]
+        }
+    ],
+    "rejections": [
+        {
+            "code": "SHAPE",
+            "where": null,
+            "why": "unknown field 'policy_line' — the plan may not invent fields"
+        },
+        {
+            "code": "SHAPE",
+            "where": null,
+            "why": "unknown field 'evidence' — the plan may not invent fields"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 3,
+        "at": "2026-10-29T08:56:37+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

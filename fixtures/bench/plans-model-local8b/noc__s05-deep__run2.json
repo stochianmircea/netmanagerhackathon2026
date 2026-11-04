@@ -1,0 +1,62 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s05-deep",
+        "reasoning": "Following policy line 3, since battery.soc is below 30% (12%). The load.power_w is high at 2300 W, which suggests that we should cut power to devices that consume a lot and matter little. However, disabling the media-server and lab-switch would leave us without Wi-Fi for office use, which might be critical.",
+        "actions": [
+            {
+                "target": "guest-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 120000,
+                "expected_saving_w": 8,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 9,
+            "ok": false,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 3,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "missing 'because'"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field '# kbit/s is a reasonable limit for guest Wi-Fi to save power while still allowing some use. This will save 8 W according to the device's specs and policy line 2 which says it's sacrificial. The state shows that battery.soc is low (12%) and load.power_w is high at 2300 W, indicating a need to cut power consumption immediately. Limiting guest Wi-Fi bandwidth will help reduce overall power usage without impacting critical systems like the gate camera or controller, which are protected by policy line 1 and marked [NEVER TOUCH]. The evidence for this decision includes the low battery state (battery.soc) and high load power (load.power_w). Policy line 2 supports limiting guest Wi-Fi bandwidth as it is considered sacrificial. Finally, the expected saving of 8 W aligns with the device's specs and policy line 2 which says it's sacrificial. The evidence for this decision includes the low battery state (battery.soc) and high load power (load.power_w). Policy line 2 supports limiting guest Wi-Fi bandwidth as it is considered sacrificial. Finally, the expected saving of 8 W aligns with the device's specs and policy line 2 which says it's sacrificial.'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 3.5,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-10-30T20:58:10+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

@@ -1,0 +1,52 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s02-midday-cloud",
+        "reasoning": "Following policy line 3: if battery drops below 30%, cut first what consumes a lot and matters little. The state shows the battery is at 61% SOC, but discharging at 1600 W with only 600 W coming in from PV.",
+        "actions": [
+            {
+                "target": "dust-extractor",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 900,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "battery.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 26.1,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-workshop__s02-midday-cloud\",\n  \"reasoning\":\n    \"Following policy line 3, as battery.soc is below 30% (61%). The load.power_w is high at 2200 W. To cut consumption, we will disable devices that consume a lot and matter little.\",\n  \"actions\":[\n    {\n      \"target\":\"dust-extractor\",\n      \"operation\":\"disable\",\n      \"argument\":null,\n      \"expected_savin"
+        },
+        {
+            "round": 2,
+            "seconds": 2.8,
+            "ok": true,
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 3,
+        "at": "2026-10-29T08:43:37+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

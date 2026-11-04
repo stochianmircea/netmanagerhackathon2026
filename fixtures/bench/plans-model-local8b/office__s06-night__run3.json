@@ -1,0 +1,41 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s06-night",
+        "reasoning": "Following policy line 3, as battery level is below 30% (34% SOC). The load is 1750 W and we need to cut what consumes a lot and matters little.",
+        "actions": [
+            {
+                "target": "desk-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 10000,
+                "expected_saving_w": 9,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 2.5,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 3,
+        "at": "2026-10-30T21:04:25+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

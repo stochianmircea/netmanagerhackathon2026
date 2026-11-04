@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s03-grid-lost",
+        "reasoning": "The battery state of charge is 55%, which is above the threshold of 30% where action is required. The grid is not available and the load power is higher than the PV power, resulting in a discharging battery. Following policy line 4, we should cut entertainment and convenience first. However, since the battery SOC is still relatively high and there's no immediate need to act as per policy line 7, no actions are necessary at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 97.8,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-11-04T03:51:10+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

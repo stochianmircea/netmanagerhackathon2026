@@ -1,0 +1,6 @@
+{
+    "schema_version": 1,
+    "state_ref": "bench-workshop__s03-grid-lost",
+    "reasoning": "battery 55% is at or above the 30% threshold",
+    "actions": []
+}

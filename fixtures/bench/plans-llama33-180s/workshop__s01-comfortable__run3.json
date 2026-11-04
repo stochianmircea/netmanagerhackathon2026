@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s01-comfortable",
+        "reasoning": "The battery's state of charge is 82%, which is above the threshold of 30%. The system is currently not discharging, as indicated by a battery power of 0 W. Following policy line 3, no critical devices need to be cut since the battery level is high and there is no immediate need for conservation. Policy lines 1 and 4 also do not require any actions at this time because all critical systems are operational and within safe parameters. Given these conditions, no actions are necessary to conserve energy.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 136.8,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 3,
+        "at": "2026-10-29T04:09:08+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

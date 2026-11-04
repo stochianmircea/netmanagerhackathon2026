@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s03-grid-lost",
+        "reasoning": "The current battery state of charge is 55%, which is above the threshold of 30% specified in policy line 3. The grid is not available, and we are discharging at a rate of 1500 W. Given that the autonomy hours are 5.5 h, there is no immediate need to cut power consumption according to policy line 3. Following policy lines 1, 2, and 4, critical devices such as cameras at the gate, the gate controller, badge-reader, fire-panel, and floor-switch must remain operational. Guest Wi-Fi (desk-wifi) could potentially be limited for savings but given our current state, no action is necessary to ensure continued operation within safe parameters.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 120.7,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 3,
+        "at": "2026-10-29T03:23:37+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

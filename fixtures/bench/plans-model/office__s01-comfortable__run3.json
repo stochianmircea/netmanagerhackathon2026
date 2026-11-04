@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s01-comfortable",
+        "reasoning": "The battery's state of charge is at 82%, which is above the threshold of 30% specified in policy line 3. The system is currently not discharging as indicated by battery.power_w being 0 W and pv.power_w exceeding load.power_w, showing that there is sufficient power available from the PV source to cover the current load without needing to discharge the battery. Given this state, there's no immediate need to cut power consumption based on policy line 3. Policy lines 1, 2, and 4 do not trigger any actions under the current conditions since critical systems are not at risk and guest Wi-Fi, while sacrificial, does not need to be adjusted given the current power surplus.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 119.4,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 3,
+        "at": "2026-11-03T23:37:10+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

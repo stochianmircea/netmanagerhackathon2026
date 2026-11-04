@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s03-grid-lost",
+        "reasoning": "No action needed. Per policy line 3 shedding is only triggered below 30% SOC, but battery.soc is 55% with autonomy.hours at 11.7 h even though grid.available is no. Per policy line 2 guest Wi-Fi is sacrificial first when shedding is needed, but shedding is not needed now so I leave it on. Policy lines 1 and 4 are respected by touching no gate or critical devices.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 12.4,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 2,
+        "at": "2026-10-30T20:20:28+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

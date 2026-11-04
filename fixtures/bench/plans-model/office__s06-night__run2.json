@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s06-night",
+        "reasoning": "The battery state of charge is at 34%, which is above the threshold of 30% specified in policy line 3. Given this condition and considering policy lines 1, 2, and 4, there are no critical devices that need to be cut off at this moment to preserve energy since the battery's current state does not necessitate such actions according to the given policies. The system is currently discharging at a rate of 1750 W as indicated by 'battery.power_w', but with an autonomy of 2.9 hours, immediate action to cut power consumption based on policy line 3 is not required.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 107.6,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-11-04T00:15:23+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

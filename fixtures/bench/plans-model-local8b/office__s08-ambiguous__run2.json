@@ -1,0 +1,120 @@
+{
+    "ok": false,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s08-ambiguous",
+        "reasoning": "Following policy line 3, as battery SOC has dropped below 30%. The current load is high (2500 W), and we need to cut power consumption. Critical stations are already exempt from this rule.",
+        "actions": [
+            {
+                "target": "print-room",
+                "operation": "disable",
+                "argument": "",
+                "expected_saving_w": 160,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": "",
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": "",
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 4.5,
+            "ok": false,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 3,
+            "rejections": [
+                {
+                    "code": "OPERATION",
+                    "where": "action[0]",
+                    "why": "'disable' takes no argument"
+                },
+                {
+                    "code": "OPERATION",
+                    "where": "action[1]",
+                    "why": "'disable' takes no argument"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 5,
+            "ok": false,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 3,
+            "rejections": [
+                {
+                    "code": "OPERATION",
+                    "where": "action[0]",
+                    "why": "'disable' takes no argument"
+                },
+                {
+                    "code": "OPERATION",
+                    "where": "action[1]",
+                    "why": "'disable' takes no argument"
+                },
+                {
+                    "code": "OPERATION",
+                    "where": "action[2]",
+                    "why": "'disable' takes no argument"
+                }
+            ]
+        }
+    ],
+    "rejections": [
+        {
+            "code": "OPERATION",
+            "where": "action[0]",
+            "why": "'disable' takes no argument"
+        },
+        {
+            "code": "OPERATION",
+            "where": "action[1]",
+            "why": "'disable' takes no argument"
+        },
+        {
+            "code": "OPERATION",
+            "where": "action[2]",
+            "why": "'disable' takes no argument"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-10-30T21:05:36+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

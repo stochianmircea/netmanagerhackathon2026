@@ -1,0 +1,70 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s05-deep",
+        "reasoning": "Following policy lines 3 and 4, we need to cut power consumption while keeping critical stations alive. The battery is discharging at a rate of 2150 W, which is above the threshold for cutting non-essential devices. We have identified two devices that can be disabled without affecting critical functions.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 6.2,
+            "ok": false,
+            "actions": 3,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "missing 'because'"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field 'kbit/s is a reasonable limit for desk Wi-Fi under these conditions. This will save approximately 9 W of power. The policy line followed was 3, and the evidence supporting this decision includes the battery's state of charge (12%) and the high load power consumption (2300 W). The badge reader and fire panel are critical stations that must never be touched, so they are not included in these actions. The expected saving from disabling the print room is too low to make a significant impact on the overall power consumption, so it has been omitted from this plan.'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 4.3,
+            "ok": true,
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 2,
+        "at": "2026-10-29T08:39:49+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

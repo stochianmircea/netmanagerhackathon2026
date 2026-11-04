@@ -1,0 +1,31 @@
+{
+  "scenario_id": "s02-midday-cloud",
+  "note": "a cloud passes, grid still there",
+  "facts": {
+    "battery.soc": {
+      "value": 61,
+      "unit": "%",
+      "source": "inverter"
+    },
+    "battery.power_w": {
+      "value": 1600,
+      "unit": "W",
+      "note": "positive = discharging",
+      "source": "inverter"
+    },
+    "pv.power_w": {
+      "value": 600,
+      "unit": "W",
+      "source": "inverter"
+    },
+    "load.power_w": {
+      "value": 2200,
+      "unit": "W",
+      "source": "inverter"
+    },
+    "grid.available": {
+      "value": true,
+      "source": "transfer-switch"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s03-grid-lost",
+        "reasoning": "The battery's state of charge is at 55%, which is above the threshold of 30% mentioned in policy line 3. The grid is not available and the system is discharging at a rate of 1500 W, as indicated by facts battery.soc, grid.available, and battery.power_w. Given that there are no critical actions needed to be taken based on the current state and the policies provided, no devices need to be cut or modified to conserve energy at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 97.3,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 1,
+        "at": "2026-10-29T02:23:11+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

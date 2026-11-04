@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s02-midday-cloud",
+        "reasoning": "The current battery state of charge is 61%, which is above the threshold of 30% specified in policy line 3. The system is currently discharging at a rate of 1600 W, but the grid is available. Following policy line 1 and considering the measured state, no critical devices need to be touched. Given that the battery level is not critically low and the grid is available, there's no immediate need to cut power consumption based on the provided policies and measurements.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 137.5,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-11-03T23:39:27+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

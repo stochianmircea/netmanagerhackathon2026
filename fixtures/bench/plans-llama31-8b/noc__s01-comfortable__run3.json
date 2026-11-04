@@ -1,0 +1,38 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s01-comfortable",
+        "reasoning": "Following policy lines 3 and 2, we observed that the battery is discharging (battery.power_w = 0 W) and has a low capacity (82% SOC). Guest Wi-Fi is sacrificial. However, critical stations are never touched, so we cannot cut power to them.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 4.4,
+            "ok": false,
+            "actions": 3,
+            "rejections": [
+                {
+                    "code": "GROUNDING",
+                    "where": "action[2]",
+                    "why": "no evidence cited"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 1.9,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 3,
+        "at": "2026-10-29T08:33:35+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

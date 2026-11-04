@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s03-grid-lost",
+        "reasoning": "The current battery state of charge is 55%, which is above the threshold of 30% where action is required. The grid is not available and the load power is higher than the PV power, resulting in a discharge of 1500 W from the battery. Following policy line 4, we should cut entertainment and convenience first. However, since the battery level is still relatively high and there's no immediate need to act as per policy line 7, no actions are necessary at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 90.3,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 3,
+        "at": "2026-11-04T03:54:11+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

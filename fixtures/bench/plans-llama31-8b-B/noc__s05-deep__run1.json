@@ -1,0 +1,75 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s05-deep",
+        "reasoning": "Following policy line 7: if battery drops below 30%, act. Below 15%, cut everything that is not protected. Battery SOC is at 12%. Cutting all non-protected devices to preserve critical ones.",
+        "actions": [
+            {
+                "target": "media-server",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 180,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            },
+            {
+                "target": "lab-switch",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 210,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            },
+            {
+                "target": "office-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 1000,
+                "expected_saving_w": 6,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 26.6,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-noc__s05-deep\",\n  \"reasoning\":\"Following policy lines 4, 5, and 7: cut entertainment and convenience first, machines mid-job matter more than comfort, and act if the battery drops below 30%. The state shows a low battery level (12% SOC) and high load power (2300 W), indicating that action is needed.\",\n  \"actions\":[\n    {\n      \"target\":\"media-server\",\n "
+        },
+        {
+            "round": 2,
+            "seconds": 4.1,
+            "ok": true,
+            "actions": 3,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 1,
+        "at": "2026-10-29T08:48:30+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

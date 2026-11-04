@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s06-night",
+        "reasoning": "The battery state of charge is at 34%, which is above the threshold of 30% specified in policy line 3. Given this condition and considering policy lines 1, 2, and 4, there are no critical devices that need to be cut off at this moment to preserve energy. The current power consumption and battery state do not necessitate cutting any non-critical but high-consumption devices as the autonomy hours are still at 2.9 hours, indicating some buffer before drastic measures are required.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 103.1,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-11-04T00:13:36+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

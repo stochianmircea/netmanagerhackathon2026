@@ -1,0 +1,68 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s03-grid-lost",
+        "reasoning": "Following policy lines 3 and 2, we need to cut power consumption by disabling devices that consume a lot but matter little. Guest Wi-Fi is sacrificial.",
+        "actions": [
+            {
+                "target": "guest-wifi",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 120,
+                "because": {
+                    "policy_line": 2,
+                    "evidence": [
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "media-server",
+                "operation": "set_power_profile",
+                "argument": "eco",
+                "expected_saving_w": 55,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 3.2,
+            "ok": false,
+            "actions": 2,
+            "rejections": [
+                {
+                    "code": "GROUNDING",
+                    "where": "action[0]",
+                    "why": "cites '1500 W' as evidence, but there is no such fact in the state"
+                },
+                {
+                    "code": "GROUNDING",
+                    "where": "action[1]",
+                    "why": "cites '55 %' as evidence, but there is no such fact in the state"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 3.6,
+            "ok": true,
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 2,
+        "at": "2026-10-29T08:34:47+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s02-midday-cloud",
+        "reasoning": "The current battery state of charge is 61%, which is above the threshold of 30% where action is required. The policy indicates that entertainment and convenience devices should be cut first. However, since the battery is not in a critical state and the grid is available, no actions are necessary at this time. Following policy line 7, we see that below 15% everything not protected would be cut, but we are far from that threshold. Thus, based on the current state (battery.soc, grid.available), no devices need to be disabled or adjusted.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 107.3,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 1,
+        "at": "2026-10-29T06:03:07+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

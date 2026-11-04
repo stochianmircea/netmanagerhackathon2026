@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s02-midday-cloud",
+        "reasoning": "Battery SOC is 61%, well above the 30% cutoff in policy line 3, so no low-battery cuts are required. Grid is available with 5.7h autonomy. No listed devices match policy line 1 (gate cameras/controller) or line 2 (guest Wi-Fi), and policy line 4 forbids touching critical stations. No action needed.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 5.9,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 3,
+        "at": "2026-10-30T20:25:05+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

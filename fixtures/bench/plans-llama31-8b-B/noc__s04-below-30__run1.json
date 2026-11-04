@@ -1,0 +1,45 @@
+{
+    "ok": false,
+    "plan": null,
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 26.6,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-noc__s04-below-30\",\n  \"reasoning\":\n    \"Following policy lines 4, 5, and 7: cut entertainment and convenience first, machines mid-job matter more than comfort, and act if the battery drops below 30%. The state shows a battery SOC of 28%, which is below 30%.\",\n  \"actions\":[\n    {\n      \"target\":\"media-server\",\n      \"operation\":\"disable\",\n      \"argument"
+        },
+        {
+            "round": 2,
+            "seconds": 26.4,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-noc__s04-below-30\",\n  \"reasoning\":\n    \"Following policy line 7: if battery drops below 30%, act. Battery SOC is at 28% (fact id: battery.soc). We must take action to conserve energy.\",\n  \"actions\":[\n    {\n      \"target\":\"guest-wifi\",\n      \"operation\":\"disable\",\n      \"argument\":null,\n      \"expected_saving_w\":120,\n      \"because\":{\n        \"policy_lin"
+        }
+    ],
+    "rejections": [
+        {
+            "code": "MODEL",
+            "where": null,
+            "why": "the model did not return a JSON object"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 1,
+        "at": "2026-10-29T08:47:41+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

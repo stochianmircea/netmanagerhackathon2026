@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s01-comfortable",
+        "reasoning": "The battery state of charge is 82%, which is above the threshold of 30% where action is required. The system is currently not discharging as indicated by a power value of 0 W and there's an available grid connection, so no immediate action to cut devices is necessary according to policy lines 1 through 7. Given this state, following policy line 7, no cuts are needed since the battery level is well above the thresholds for taking action.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 97.2,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 1,
+        "at": "2026-10-29T05:03:16+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

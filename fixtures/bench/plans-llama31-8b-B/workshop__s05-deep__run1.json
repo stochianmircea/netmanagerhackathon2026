@@ -1,0 +1,89 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s05-deep",
+        "reasoning": "Following policy lines 4, 5, and 7: cutting entertainment and convenience first, leaving machines mid-job for last, and acting below 30% battery. The state shows a low battery level (12%) and discharging power (2150 W). Since the battery is already at 12%, we cannot wait until it drops to 15%. We will cut everything that is not protected.",
+        "actions": [
+            {
+                "target": "charger-bank",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 420,
+                "because": {
+                    "policy_line": 7,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            },
+            {
+                "target": "shop-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 7000,
+                "expected_saving_w": 7,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "cnc",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 650,
+                "because": {
+                    "policy_line": 5,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "dust-extractor",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 900,
+                "because": {
+                    "policy_line": 5,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 3.6,
+            "ok": false,
+            "actions": 2,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": "action[1]",
+                    "why": "unknown field '><!-- 7 kbit/s is a reasonable limit for shop Wi-Fi under load. This saves 7 W. --></'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 8.2,
+            "ok": true,
+            "actions": 4,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 1,
+        "at": "2026-10-29T08:56:25+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s03-grid-lost",
+        "reasoning": "The battery's state of charge is at 55%, which is above the threshold of 30% where action is required. The load power is higher than the combined power from the PV and the grid is not available. Following policy line 4, we should cut entertainment and convenience first. However, since the battery's state of charge is still relatively high and there are no critical issues, no actions are necessary at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 125.8,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-11-04T01:59:47+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

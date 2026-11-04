@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s03-grid-lost",
+        "reasoning": "The current battery state of charge is 55%, which is above the threshold of 30% where action is required. The policy dictates that we should cut entertainment and convenience first when necessary. However, given the current state, no immediate action to cut devices is needed as per policy line 4 and 7. Thus, no actions are recommended at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 115.7,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-11-04T02:49:20+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

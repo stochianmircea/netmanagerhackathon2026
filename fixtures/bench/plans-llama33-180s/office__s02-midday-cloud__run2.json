@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s02-midday-cloud",
+        "reasoning": "The current battery state of charge is 61%, which is above the threshold of 30% specified in policy line 3. The system is currently discharging at a rate of 1600 W, but the grid is available and the autonomy hours are 5.7 h, indicating that there is no immediate need to cut power consumption. Following policy line 1, cameras at the gate and the gate controller must stay alive, but since they are not listed as devices that can be touched, we focus on other devices. Given the current state, no actions are necessary to ensure the system's stability or to follow any of the specified policies.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 112.3,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 2,
+        "at": "2026-10-29T03:15:45+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

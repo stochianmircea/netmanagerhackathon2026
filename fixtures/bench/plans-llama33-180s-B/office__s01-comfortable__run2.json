@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s01-comfortable",
+        "reasoning": "The current battery state of charge is 82%, which is above the threshold of 30% where action is required. The system is also currently receiving power from the grid and the PV panels are generating more power than the load is consuming, resulting in no discharge from the battery (battery.power_w = 0 W). Following policy line 7, since the battery drops below 30% is not met, no actions are necessary to cut power consumption. Policy lines regarding critical systems and guest Wi-Fi do not apply as there's no need for reduction at this state.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 139.2,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 2,
+        "at": "2026-10-29T05:59:17+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

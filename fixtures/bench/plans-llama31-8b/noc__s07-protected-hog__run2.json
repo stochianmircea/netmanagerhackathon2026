@@ -1,0 +1,52 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s07-protected-hog",
+        "reasoning": "Following policy line 3: if battery drops below 30%, cut first what consumes a lot and matters little. The state shows the battery is at 26% SOC, discharging at 2300 W, with a load of 2600 W. Guest Wi-Fi is the only device that can be disabled without violating any rules.",
+        "actions": [
+            {
+                "target": "guest-wifi",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 120,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 26.4,
+            "ok": false,
+            "rejections": [
+                {
+                    "code": "MODEL",
+                    "where": null,
+                    "why": "the model did not return a JSON object"
+                }
+            ],
+            "raw": "{\n  \"schema_version\":1,\n  \"state_ref\":\"bench-noc__s07-protected-hog\",\n  \"reasoning\":\n    \"Following policy line 3, as battery level is below 30%. The state shows a load of 2600 W and a PV power input of only 300 W, indicating that the system is under strain. To mitigate this, we will cut devices that consume a lot but matter little.\",\n  \"actions\":[\n    {\n      \"target\":\"media-server\",\n      \"opera"
+        },
+        {
+            "round": 2,
+            "seconds": 3,
+            "ok": true,
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 2,
+        "at": "2026-10-29T08:36:21+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

@@ -1,0 +1,92 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s06-night",
+        "reasoning": "Following policy line 4, we cut entertainment and convenience first. The battery is discharging at 1750 W with a SOC of 34%, which is below the threshold for action (30%). We have no PV power available.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "print-room",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 160,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "desk-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 1100,
+                "expected_saving_w": 9,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w",
+                        "grid.available"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 8.5,
+            "ok": false,
+            "actions": 4,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field '# Assuming a bandwidth of 110 kbit/s (10% of the maximum) will save approximately 9 W. This is an educated guess and may need to be adjusted based on actual usage patterns. We are trying to limit the power consumption without completely disabling the Wi-Fi service for the guests in the waiting room, as per policy line 3. The battery SOC is 34%, which is below the threshold for action (30%). We have no PV power available and a load of 1750 W on the battery, indicating that we need to conserve energy quickly. This action will save approximately 9 W, which is a small but non-negligible amount given our current situation. The policy line being followed is 4, as we are cutting entertainment and convenience first, and this device falls under that category. The evidence for this decision includes the battery SOC (34%), the load power (1750 W), and the fact that we have no PV power available (grid.available = 'no'). We are trying to balance the need to conserve energy with the need to keep some services running, as per policy line 3. This action will help us achieve this balance by reducing the power consumption of the desk Wi-Fi service without completely disabling it. The expected saving is approximately 9 W, which is a small but non-negligible amount given our current situation.'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 5.3,
+            "ok": true,
+            "actions": 4,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 1,
+        "at": "2026-10-29T08:52:48+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

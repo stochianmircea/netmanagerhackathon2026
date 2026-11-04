@@ -1,0 +1,104 @@
+{
+    "ok": false,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s05-deep",
+        "reasoning": "Following policy lines 4, 5, and 7: cut entertainment and convenience first, machines mid-job matter more than comfort, and the battery is critically low. The state shows a battery level of 12% SOC and discharging at 2150 W.",
+        "actions": [
+            {
+                "target": "charger-bank",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 420,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "shop-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 70000,
+                "# kbit/s (a reasonable value for a small shop Wi-Fi network, assuming it's not used much at this point in time; the actual value is not specified in the problem statement and would need to be determined by someone with more knowledge of networking than I have.)": "",
+                "expected_saving_w": 7,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "cnc",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 650,
+                "because": {
+                    "policy_line": 5,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "dust-extractor",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 900,
+                "because": {
+                    "policy_line": 5,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 1.5,
+            "ok": false,
+            "actions": 0,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "missing required field 'actions'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 5.6,
+            "ok": false,
+            "actions": 4,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": "action[1]",
+                    "why": "unknown field '# kbit/s (a reasonable value for a small shop Wi-Fi network, assuming it's not used much at this point in time; the actual value is not specified in the problem statement and would need to be determined by someone with more knowledge of networking than I have.)'"
+                }
+            ]
+        }
+    ],
+    "rejections": [
+        {
+            "code": "SHAPE",
+            "where": "action[1]",
+            "why": "unknown field '# kbit/s (a reasonable value for a small shop Wi-Fi network, assuming it's not used much at this point in time; the actual value is not specified in the problem statement and would need to be determined by someone with more knowledge of networking than I have.)'"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 2,
+        "at": "2026-10-29T08:56:33+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

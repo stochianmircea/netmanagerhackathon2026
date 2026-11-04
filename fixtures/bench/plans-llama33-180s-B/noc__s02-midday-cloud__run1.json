@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s02-midday-cloud",
+        "reasoning": "The current battery state of charge is 61%, which is above the threshold of 30% where action is required. The load power is 2200 W and the grid is available. Following policy line 7, no action is needed as the battery level is not critical. Policy lines 1-6 do not apply in this scenario as the conditions for those actions are not met.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 132.2,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 1,
+        "at": "2026-10-29T05:08:18+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

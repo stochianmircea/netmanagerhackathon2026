@@ -1,0 +1,57 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s08-ambiguous",
+        "reasoning": "The battery's state of charge is at 29%, which is below the 30% threshold mentioned in policy line 7. According to this policy, we should act to conserve energy. Given that the grid is not available and we are discharging at a rate of 2120 W while only receiving 380 W from the PV, it's crucial to reduce our load power of 2500 W. Following policy lines 4 and 5, we prioritize cutting non-essential devices first, such as entertainment and convenience devices, before considering machines that are mid-job or critical infrastructure.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w",
+                        "grid.available"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w",
+                        "grid.available"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 171.2,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 3,
+        "at": "2026-11-04T03:38:19+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

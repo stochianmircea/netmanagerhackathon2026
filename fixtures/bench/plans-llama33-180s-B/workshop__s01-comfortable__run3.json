@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s01-comfortable",
+        "reasoning": "The current battery state of charge is 82%, which is above the threshold of 30% where action is required. The grid is available and the PV power is greater than the load power, indicating that there is no need to cut any devices at this time. Following policy line 7, no actions are necessary as the battery level is not below 30%. Additionally, policy lines 1-6 do not apply in this scenario as the conditions for cutting specific devices have not been met.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 90,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 3,
+        "at": "2026-10-29T06:59:32+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

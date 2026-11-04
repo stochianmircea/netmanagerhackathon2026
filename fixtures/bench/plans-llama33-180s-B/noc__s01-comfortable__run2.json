@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s01-comfortable",
+        "reasoning": "The battery's state of charge is 82%, which is above the threshold of 30% where action is required. According to policy line 7, no actions are necessary at this state of charge. The system is currently not discharging (battery.power_w = 0 W) and has a significant amount of autonomy left (autonomy.hours = 99 h), indicating that there is no immediate need for power conservation.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 80.5,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 2,
+        "at": "2026-10-29T05:04:36+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s06-night",
+        "reasoning": "Per policy line 3, high-consumption cuts trigger only if battery.soc drops below 30%; state shows battery.soc at 34% with autonomy.hours still 9.3h, so no cut is warranted. Policy line 1 is already satisfied with gate-camera untouched, policy line 2 names Guest Wi-Fi which has no matching target in the device list, and policy line 4 requires leaving critical NEVER TOUCH stations alone. Hence no actions.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 6.6,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 3,
+        "at": "2026-10-30T20:33:18+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

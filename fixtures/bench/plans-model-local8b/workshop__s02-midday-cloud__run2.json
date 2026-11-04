@@ -1,0 +1,94 @@
+{
+    "ok": false,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s02-midday-cloud",
+        "reasoning": "Following policy line 3, we noticed that the battery is discharging at a rate of 1600 W and has only 61% SOC. We also see that the load power is 2200 W, which exceeds the PV power generation of 600 W. However, we must be careful not to disable critical devices.",
+        "actions": [
+            {
+                "target": "dust-extractor",
+                "operation": "disable",
+                "argument": "",
+                "expected_saving_w": 900,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "charger-bank",
+                "operation": "set_power_profile",
+                "argument": "eco",
+                "expected_saving_w": 160,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "shop-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 7000,
+                "expected_saving_w": 7,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 3.6,
+            "ok": false,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 2,
+            "rejections": [
+                {
+                    "code": "OPERATION",
+                    "where": "action[0]",
+                    "why": "'disable' takes no argument"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 5.5,
+            "ok": false,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 3,
+            "rejections": [
+                {
+                    "code": "OPERATION",
+                    "where": "action[0]",
+                    "why": "'disable' takes no argument"
+                }
+            ]
+        }
+    ],
+    "rejections": [
+        {
+            "code": "OPERATION",
+            "where": "action[0]",
+            "why": "'disable' takes no argument"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-10-30T21:06:11+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

@@ -1,0 +1,55 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s05-deep",
+        "reasoning": "Following policy line 3, since the battery state of charge (battery.soc) is below 30% at 12%, we need to cut devices that consume a lot but matter little. Given the current power consumption and the fact that grid is not available, we prioritize cutting devices based on their power consumption and policy rules. Policy line 2 indicates guest Wi-Fi is sacrificial, but since 'guest-wifi' is not listed in the devices, we look at other devices for potential cuts. The coffee-machine and print-room are identified as significant consumers that can be adjusted without violating critical policies.",
+        "actions": [
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available"
+                    ]
+                }
+            },
+            {
+                "target": "print-room",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 160,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "grid.available"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 166.8,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 2,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 2,
+        "at": "2026-11-04T00:07:08+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

@@ -1,0 +1,99 @@
+{
+    "ok": false,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s01-comfortable",
+        "reasoning": "Following policy lines 4 and 5: cut entertainment and convenience first, machines mid-job matter more than comfort. The battery is at 82% SOC, so no immediate action is required.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "load.power_w",
+                        "1900 W"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "load.power_w",
+                        "1900 W"
+                    ]
+                }
+            },
+            {
+                "target": "desk-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 11000,
+                "><!-- kbit/s = 11 kbit/s is a reasonable limit for desk wifi, and saves 9W. This is a good compromise between comfort and power saving. --//>    ": "expected_saving_w"
+            },
+            "because"
+        ],
+        "policy_line": 5,
+        "evidence": [
+            "load.power_w",
+            "1900 W"
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 1.1,
+            "ok": false,
+            "actions": 0,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "missing required field 'actions'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 5.3,
+            "ok": false,
+            "actions": 4,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "unknown field 'policy_line' — the plan may not invent fields"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "unknown field 'evidence' — the plan may not invent fields"
+                }
+            ]
+        }
+    ],
+    "rejections": [
+        {
+            "code": "SHAPE",
+            "where": null,
+            "why": "unknown field 'policy_line' — the plan may not invent fields"
+        },
+        {
+            "code": "SHAPE",
+            "where": null,
+            "why": "unknown field 'evidence' — the plan may not invent fields"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 2,
+        "at": "2026-10-29T08:50:23+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

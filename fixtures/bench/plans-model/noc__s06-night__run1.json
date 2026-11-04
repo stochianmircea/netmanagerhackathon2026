@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s06-night",
+        "reasoning": "The battery state of charge is at 34%, which is above the threshold of 30% specified in policy line 3. Given this condition and that we are discharging (battery.power_w = 1750 W), there's no immediate need to cut power consumption according to the policy. Policy lines 1, 2, and 4 provide guidance on priorities but do not necessitate action under current conditions since the battery level is still above the critical threshold and critical stations, cameras at the gate, and the gate controller are not to be touched. Therefore, no actions are required at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 162.9,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-11-03T23:09:32+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

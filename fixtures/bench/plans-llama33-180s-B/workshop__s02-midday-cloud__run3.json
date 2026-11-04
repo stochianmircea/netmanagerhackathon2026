@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s02-midday-cloud",
+        "reasoning": "The current battery state of charge is 61%, and the power consumption is 2200 W, with a grid available. Following policy line 4, we should cut entertainment and convenience first. However, since the battery SOC is above 30% and there's no immediate need to act according to policy line 7, and given that the autonomy hours are at 18.3 hours which suggests we have sufficient power reserve for now, no actions are necessary at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 88.2,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 3,
+        "at": "2026-10-29T07:04:53+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

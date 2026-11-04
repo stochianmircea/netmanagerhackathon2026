@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s01-comfortable",
+        "reasoning": "The current battery state of charge is 82%, which is above the threshold of 30% where action is required. The policy states that entertainment and convenience devices should be cut first, but since the battery is not under stress, no actions are necessary at this time. Following policy line 7, we see that the battery is well above the 15% and 30% thresholds, so no cuts are needed.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 131.5,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-11-04T02:40:12+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

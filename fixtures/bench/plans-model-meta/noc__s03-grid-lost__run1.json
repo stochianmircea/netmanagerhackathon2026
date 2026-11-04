@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s03-grid-lost",
+        "reasoning": "Grid is lost but battery SoC is 55%, above the 30% threshold in policy line 3, with 11.7h autonomy remaining, so no load-shedding is required now. Policy line 2 makes Guest Wi-Fi sacrificial if shedding is needed, but it is not needed. Policy lines 1 and 4 protect gate camera/controller and critical stations, which are left untouched.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 9,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 1,
+        "at": "2026-10-30T20:20:15+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

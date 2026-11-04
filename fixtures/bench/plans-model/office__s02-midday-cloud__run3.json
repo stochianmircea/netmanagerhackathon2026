@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s02-midday-cloud",
+        "reasoning": "The current battery state of charge is 61%, which is above the threshold of 30% specified in policy line 3. The system is currently discharging at a rate of 1600 W, but the grid is available and the PV is generating 600 W. Given that the autonomy hours are 5.7 h, there is no immediate need to cut power consumption according to policy line 3. Policy lines 1, 2, and 4 do not require any actions based on the current state. Therefore, no actions are necessary at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 101,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 3,
+        "at": "2026-11-03T23:42:36+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

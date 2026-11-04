@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s01-comfortable",
+        "reasoning": "Battery SoC is 82%, well above the 30% cut threshold in policy line 3, so no low-battery cuts are required. PV exceeds load, battery is not discharging and grid is available, so there is no shortfall. Per lines 1 and 4 gate devices and critical stations must stay untouched, and per line 2 guest Wi-Fi is sacrificial only when cuts are needed - nothing needs cutting now.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 9.1,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 1,
+        "at": "2026-10-30T20:19:31+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

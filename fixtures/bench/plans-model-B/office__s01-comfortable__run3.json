@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s01-comfortable",
+        "reasoning": "The current battery state of charge is 82%, which is above the threshold of 30% where action is required. The system is also currently receiving power from the grid and the PV panels are generating more power than the load is consuming, indicating a stable energy situation. Following policy line 7, no actions are necessary at this time because the battery level is not below 30%. Therefore, no devices need to be cut off or modified.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 82.5,
+            "ok": true,
+            "furnizor": "local",
+            "model": "Llama3.3:latest",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "Llama3.3:latest",
+        "furnizor": "local",
+        "run": 3,
+        "at": "2026-11-04T02:42:58+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

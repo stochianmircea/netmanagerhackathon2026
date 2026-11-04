@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s01-comfortable",
+        "reasoning": "Per policy line 3, cuts are only required if battery drops below 30%. State shows battery.soc at 82% with grid.available yes, pv.power_w exceeding load.power_w and autonomy.hours at 99 h, so nothing needs cutting. Policy lines 1, 2 and 4 were checked and critical NEVER TOUCH devices were left alone.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 6,
+            "ok": true,
+            "furnizor": "meta",
+            "model": "muse-spark-1.3",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "muse-spark-1.3",
+        "furnizor": "meta",
+        "run": 1,
+        "at": "2026-10-30T20:24:35+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

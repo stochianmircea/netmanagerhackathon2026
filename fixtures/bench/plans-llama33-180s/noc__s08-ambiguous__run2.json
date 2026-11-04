@@ -1,0 +1,40 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s08-ambiguous",
+        "reasoning": "Following policy line 3, since the battery state of charge is below 30% (battery.soc = 29%), we need to cut devices that consume a lot and matter little. The state also shows that we are discharging at a high rate (battery.power_w = 2120 W) and our autonomy is limited (autonomy.hours = 4.4 h). Given these conditions, the first device to consider cutting is the media-server as it consumes a significant amount of power (180 W) and is not critical or sacrificial by definition in the given policy lines.",
+        "actions": [
+            {
+                "target": "media-server",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 180,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "battery.power_w",
+                        "autonomy.hours"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 137.8,
+            "ok": true,
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 2,
+        "at": "2026-10-29T03:03:07+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

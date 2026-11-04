@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s02-midday-cloud",
+        "reasoning": "The current battery state of charge is 61%, which is above the threshold of 30%. The system is discharging at a rate of 1600 W, but the PV is generating 600 W and the grid is available. Following policy line 1, cameras at the gate and the gate controller must stay alive. Since the battery level is not critical and there are no devices consuming a lot that can be cut without violating other policies, no actions are necessary at this time.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 142.7,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 3,
+        "at": "2026-10-29T03:18:08+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

@@ -1,0 +1,273 @@
+{
+    "ok": false,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s07-protected-hog",
+        "reasoning": "Following policy lines 4 and 5: cut entertainment and convenience first. The state shows a battery SOC of 26%, discharging at 2300 W, with a remaining autonomy of 1.7 hours.",
+        "actions": [
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "desk-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 900,
+                "# Assuming a reasonable bandwidth limit for desk wifi (this value is not provided in the problem statement, so I made an educated guess based on typical values for such devices. Adjust as needed to match your specific use case or environment requirements.)": "",
+                "expected_saving_w": 9,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "print-room",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 160,
+                "because": {
+                    "policy_line": 5,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "floor-switch",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 70,
+                "because": {
+                    "policy_line": 5,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "floor-switch",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 70,
+                "because": {
+                    "policy_line": 5,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "CNC",
+                "operation": "set_power_profile",
+                "argument": "eco",
+                "expected_saving_w": null,
+                "# The actual saving is not provided in the problem statement. This value should be adjusted based on the specific device specifications or expert advice.": "",
+                "because": {
+                    "policy_line": 5,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "dust extractor",
+                "operation": "set_power_profile",
+                "argument": "eco",
+                "expected_saving_w": null,
+                "# The actual saving is not provided in the problem statement. This value should be adjusted based on the specific device specifications or expert advice.": "",
+                "because": {
+                    "policy_line": 5,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "guest-wifi",
+                "operation": "enable",
+                "argument": null,
+                "expected_saving_w": null,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 7.7,
+            "ok": false,
+            "actions": 4,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "unknown field 'policy_line' — the plan may not invent fields"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": null,
+                    "why": "unknown field 'evidence' — the plan may not invent fields"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 10.4,
+            "ok": false,
+            "actions": 9,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field '# Assuming a reasonable bandwidth limit for desk wifi (this value is not provided in the problem statement, so I made an educated guess based on typical values for such devices. Adjust as needed to match your specific use case or environment requirements.)'"
+                },
+                {
+                    "code": "PROTECTION",
+                    "where": "action[4]",
+                    "why": "target 'floor-switch' (Floor switch) is on the never-touch list"
+                },
+                {
+                    "code": "CAPABILITY",
+                    "where": "action[4]",
+                    "why": "'disable' is not declared for 'floor-switch' — nothing may be done to this device"
+                },
+                {
+                    "code": "PROTECTION",
+                    "where": "action[5]",
+                    "why": "target 'floor-switch' (Floor switch) is on the never-touch list"
+                },
+                {
+                    "code": "CONFLICT",
+                    "where": "action[5]",
+                    "why": "target 'floor-switch' already appears in action[4] — a plan may not act twice on the same device"
+                },
+                {
+                    "code": "CAPABILITY",
+                    "where": "action[5]",
+                    "why": "'disable' is not declared for 'floor-switch' — nothing may be done to this device"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": "action[6]",
+                    "why": "unknown field '# The actual saving is not provided in the problem statement. This value should be adjusted based on the specific device specifications or expert advice.'"
+                },
+                {
+                    "code": "EXISTENCE",
+                    "where": "action[6]",
+                    "why": "target 'CNC' is not in the inventory"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": "action[7]",
+                    "why": "unknown field '# The actual saving is not provided in the problem statement. This value should be adjusted based on the specific device specifications or expert advice.'"
+                },
+                {
+                    "code": "EXISTENCE",
+                    "where": "action[7]",
+                    "why": "target 'dust extractor' is not in the inventory"
+                },
+                {
+                    "code": "EXISTENCE",
+                    "where": "action[8]",
+                    "why": "target 'guest-wifi' is not in the inventory"
+                }
+            ]
+        }
+    ],
+    "rejections": [
+        {
+            "code": "SHAPE",
+            "where": "action[2]",
+            "why": "unknown field '# Assuming a reasonable bandwidth limit for desk wifi (this value is not provided in the problem statement, so I made an educated guess based on typical values for such devices. Adjust as needed to match your specific use case or environment requirements.)'"
+        },
+        {
+            "code": "PROTECTION",
+            "where": "action[4]",
+            "why": "target 'floor-switch' (Floor switch) is on the never-touch list"
+        },
+        {
+            "code": "CAPABILITY",
+            "where": "action[4]",
+            "why": "'disable' is not declared for 'floor-switch' — nothing may be done to this device"
+        },
+        {
+            "code": "PROTECTION",
+            "where": "action[5]",
+            "why": "target 'floor-switch' (Floor switch) is on the never-touch list"
+        },
+        {
+            "code": "CONFLICT",
+            "where": "action[5]",
+            "why": "target 'floor-switch' already appears in action[4] — a plan may not act twice on the same device"
+        },
+        {
+            "code": "CAPABILITY",
+            "where": "action[5]",
+            "why": "'disable' is not declared for 'floor-switch' — nothing may be done to this device"
+        },
+        {
+            "code": "SHAPE",
+            "where": "action[6]",
+            "why": "unknown field '# The actual saving is not provided in the problem statement. This value should be adjusted based on the specific device specifications or expert advice.'"
+        },
+        {
+            "code": "EXISTENCE",
+            "where": "action[6]",
+            "why": "target 'CNC' is not in the inventory"
+        },
+        {
+            "code": "SHAPE",
+            "where": "action[7]",
+            "why": "unknown field '# The actual saving is not provided in the problem statement. This value should be adjusted based on the specific device specifications or expert advice.'"
+        },
+        {
+            "code": "EXISTENCE",
+            "where": "action[7]",
+            "why": "target 'dust extractor' is not in the inventory"
+        },
+        {
+            "code": "EXISTENCE",
+            "where": "action[8]",
+            "why": "target 'guest-wifi' is not in the inventory"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 1,
+        "at": "2026-10-29T08:53:50+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

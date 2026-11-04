@@ -1,0 +1,148 @@
+{
+    "ok": false,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-workshop__s01-comfortable",
+        "reasoning": "Following policy lines 4, 5, and 7: cut entertainment and convenience first, machines mid-job matter more than comfort, and act if the battery drops below 30%. The state shows a battery SOC of 82%, which is above 30%.",
+        "actions": [
+            {
+                "target": "charger-bank",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 420,
+                "because": {
+                    "policy_line": 4,
+                    "evidence": [
+                        "load.power_w",
+                        "1900 W"
+                    ]
+                }
+            },
+            {
+                "target": "shop-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 70000,
+                "expected_saving_w": 7,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "load.power_w",
+                        "1900 W"
+                    ]
+                }
+            },
+            {
+                "target": "cnc",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 650,
+                "because": {
+                    "policy_line": 5,
+                    "evidence": [
+                        "battery.soc",
+                        "82 %"
+                    ]
+                }
+            },
+            {
+                "target": "dust-extractor",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 900,
+                "because": {
+                    "policy_line": 5,
+                    "evidence": [
+                        "battery.soc",
+                        "82 %"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 3.3,
+            "ok": false,
+            "actions": 3,
+            "rejections": [
+                {
+                    "code": "GROUNDING",
+                    "where": "action[0]",
+                    "why": "cites '1900 W' as evidence, but there is no such fact in the state"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": "action[1]",
+                    "why": "missing 'because'"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": "action[1]",
+                    "why": "unknown field '><!-- kbit/s, a reasonable limit for guest Wi-Fi --!&gt;     '"
+                },
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "action is not an object"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 7,
+            "ok": false,
+            "actions": 4,
+            "rejections": [
+                {
+                    "code": "GROUNDING",
+                    "where": "action[0]",
+                    "why": "cites '1900 W' as evidence, but there is no such fact in the state"
+                },
+                {
+                    "code": "GROUNDING",
+                    "where": "action[1]",
+                    "why": "cites '1900 W' as evidence, but there is no such fact in the state"
+                },
+                {
+                    "code": "GROUNDING",
+                    "where": "action[2]",
+                    "why": "cites '82 %' as evidence, but there is no such fact in the state"
+                },
+                {
+                    "code": "GROUNDING",
+                    "where": "action[3]",
+                    "why": "cites '82 %' as evidence, but there is no such fact in the state"
+                }
+            ]
+        }
+    ],
+    "rejections": [
+        {
+            "code": "GROUNDING",
+            "where": "action[0]",
+            "why": "cites '1900 W' as evidence, but there is no such fact in the state"
+        },
+        {
+            "code": "GROUNDING",
+            "where": "action[1]",
+            "why": "cites '1900 W' as evidence, but there is no such fact in the state"
+        },
+        {
+            "code": "GROUNDING",
+            "where": "action[2]",
+            "why": "cites '82 %' as evidence, but there is no such fact in the state"
+        },
+        {
+            "code": "GROUNDING",
+            "where": "action[3]",
+            "why": "cites '82 %' as evidence, but there is no such fact in the state"
+        }
+    ],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 1,
+        "at": "2026-10-29T08:54:37+02:00",
+        "policy": "policy/example-policy-b.md"
+    }
+}

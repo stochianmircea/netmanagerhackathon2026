@@ -1,0 +1,43 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s04-below-30",
+        "reasoning": "Following policy line 3, since battery.soc is below 30% (28%). The load.power_w is 2550 W, which is the highest power consumption. However, we cannot disable lab-switch as it consumes only 210 W, and there are other devices that consume more.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 2.6,
+            "ok": false,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 1,
+            "rejections": [
+                {
+                    "code": "OPERATION",
+                    "where": "action[0]",
+                    "why": "'disable' takes no argument"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 1.8,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-10-30T20:57:48+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

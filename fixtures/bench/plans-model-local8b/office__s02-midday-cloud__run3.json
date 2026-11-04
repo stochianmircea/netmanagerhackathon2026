@@ -1,0 +1,41 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s02-midday-cloud",
+        "reasoning": "Following policy lines 3 and 4, we determined that no critical stations need to be touched. We then looked at devices consuming a lot of power but mattering little. The print room consumes 160 W, which is a significant amount, and disabling it would save 160 W.",
+        "actions": [
+            {
+                "target": "print-room",
+                "operation": "disable",
+                "expected_saving_w": 160,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "load.power_w",
+                        "battery.soc"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 2.6,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 3,
+        "at": "2026-10-30T20:59:56+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

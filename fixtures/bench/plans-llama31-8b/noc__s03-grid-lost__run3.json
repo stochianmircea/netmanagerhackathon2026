@@ -1,0 +1,78 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s03-grid-lost",
+        "reasoning": "Following policy line 3, since battery.soc is below 30% (55%). The load.power_w is high at 2400 W. To cut power consumption, we need to disable devices that consume a lot and matter little.",
+        "actions": [
+            {
+                "target": "media-server",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 180,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "lab-switch",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 210,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            },
+            {
+                "target": "guest-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 120000,
+                "expected_saving_w": 8,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc",
+                        "load.power_w"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 10.4,
+            "ok": false,
+            "actions": 3,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field '# kbit/s (120 kbps) is the minimum to save power while still allowing some use of guest Wi-Fi. This saves 120 W according to the OWNER's measurement for disable operation, but we are limiting bandwidth instead, so it saves 8 W as per the OWNER's measurement for limit_bandwidth operation on this device. We choose this because it matters little and consumes a lot (policy line 3). The battery is discharging at 1500 W, which is high, and the load power is also high at 2400 W, indicating we need to cut power consumption. This action will help reduce power consumption by limiting guest Wi-Fi bandwidth while still allowing some use of it, thus following policy line 3 and fact battery.power_w (discharging) and load.power_w (high). We are not disabling the device completely because it is not marked as [NEVER TOUCH] like gate-camera or gate-controller. The expected saving in watts is 8 W, which does not exceed what this device draws according to its OWNER's measurement for limit_bandwidth operation on this device. This action will help reduce power consumption by limiting guest Wi-Fi bandwidth while still allowing some use of it, thus following policy line 3 and fact battery.power_w (discharging) and load.power_w (high). We are not disabling the device completely because it is not marked as [NEVER TOUCH] like gate-camera or gate-controller. The expected saving in watts is 8 W, which does not exceed what this device draws according to its OWNER's measurement for limit_bandwidth operation on this device.'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 5.6,
+            "ok": true,
+            "actions": 3,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "run": 3,
+        "at": "2026-10-29T08:35:03+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

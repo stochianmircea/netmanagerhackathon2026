@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s02-midday-cloud",
+        "reasoning": "The current battery state of charge is 61%, which is above the threshold of 30%. The system is discharging at a rate of 1600 W. Following policy line 3, we should cut what consumes a lot and matters little when the battery drops below 30%. However, since the battery is currently above this threshold, no actions are necessary to conserve energy. Policy lines 1 and 4 ensure that critical devices such as cameras at the gate, the gate controller, and critical stations remain untouched. Given the current state, there's no need for any adjustments.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 158.4,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 1,
+        "at": "2026-10-29T02:18:35+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

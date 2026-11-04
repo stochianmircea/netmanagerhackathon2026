@@ -1,0 +1,80 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s08-ambiguous",
+        "reasoning": "Following policy line 3, as battery SOC has dropped below 30% (fact id: battery.soc). The load is high (2500 W) and the PV power is relatively low (380 W), indicating a need to cut consumption. Critical stations are not touched, so we focus on non-essential devices.",
+        "actions": [
+            {
+                "target": "print-room",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 160,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            },
+            {
+                "target": "signage",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 240,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            },
+            {
+                "target": "coffee-machine",
+                "operation": "disable",
+                "argument": null,
+                "expected_saving_w": 95,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "battery.soc"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 10.9,
+            "ok": false,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 3,
+            "rejections": [
+                {
+                    "code": "SHAPE",
+                    "where": "action[2]",
+                    "why": "unknown field '# Limiting desk Wi-Fi bandwidth to save 9 W (fact id: load.power_w and device power consumption). This is a compromise between saving energy and maintaining some connectivity for guests on the guest network (policy line 2). The battery SOC is low (fact id: battery.soc), so we prioritize energy conservation over other considerations. The PV power is relatively low (fact id: pv.power_w) and the load is high (fact id: load.power_w), indicating a need to cut consumption further if possible without impacting critical functions or guest connectivity too much. This action will save 9 W, which is less than what desk-wifi draws (110 W). The expected saving is therefore correct according to the rules of this problem and the facts in evidence. The policy line being followed here is 3, as we are cutting consumption when the battery SOC drops below a certain threshold, but we're doing so in a way that prioritizes guest connectivity over other non-essential devices (policy line 2). We're also not touching critical stations, which is in accordance with policy line 4. The evidence for this action includes the fact id: battery.soc, load.power_w and pv.power_w as these are all relevant to our decision-making process here. Finally, we note that guest Wi-Fi is sacrificial (policy line 2), so if it were possible to cut its power consumption further without impacting critical functions or guest connectivity too much, then we would do so. However, in this case, limiting the bandwidth of desk-wifi is the best compromise between saving energy and maintaining some level of connectivity for guests on the guest network.'"
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "seconds": 5.4,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 3,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-10-30T21:05:27+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-noc__s03-grid-lost",
+        "reasoning": "The battery state of charge is at 55%, which is above the threshold of 30% specified in policy line 3. Therefore, no critical actions need to be taken to cut power consumption immediately. Policy lines 1 and 4 ensure that critical devices such as cameras at the gate, the gate controller, and critical stations are not touched. Given the current state, particularly with grid.available being 'no' and the battery discharging (battery.power_w is positive), we should prioritize efficiency but there's no immediate need to cut power based on the given thresholds and priorities.",
+        "actions": []
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 102.5,
+            "ok": true,
+            "actions": 0,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.3",
+        "run": 2,
+        "at": "2026-10-29T02:24:54+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}

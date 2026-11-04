@@ -1,0 +1,42 @@
+{
+    "ok": true,
+    "plan": {
+        "schema_version": 1,
+        "state_ref": "bench-office__s01-comfortable",
+        "reasoning": "Following policy lines 3 and 4, we observed that the battery is discharging at a rate of 1900 W. Critical stations are never touched, so we will not consider them for power reduction. We also note that the guest Wi-Fi (desk-wifi) consumes 110 W and matters little.",
+        "actions": [
+            {
+                "target": "desk-wifi",
+                "operation": "limit_bandwidth",
+                "argument": 90000,
+                "expected_saving_w": 9,
+                "because": {
+                    "policy_line": 3,
+                    "evidence": [
+                        "load.power_w",
+                        "battery.soc"
+                    ]
+                }
+            }
+        ]
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "seconds": 3,
+            "ok": true,
+            "furnizor": "local",
+            "model": "llama3.1:8b",
+            "actions": 1,
+            "rejections": []
+        }
+    ],
+    "rejections": [],
+    "_bench": {
+        "model": "llama3.1:8b",
+        "furnizor": "local",
+        "run": 1,
+        "at": "2026-10-30T20:59:12+02:00",
+        "policy": "policy/example-policy.md"
+    }
+}
