@@ -106,7 +106,7 @@ php src/compiler.php --policy=policy/example-policy.md \
 
 https://youtu.be/IMXgvPwjl3k
 
-_Narration is in Romanian; English subtitles are available on the video._
+_The opening and the closing demo are narrated in English; the walkthrough in the middle is in Romanian. Everything on screen — the policy, the compiler output, the two refusals and the comparison table — is in English._
 
 _Judges: demo credentials are in the submission form._
 
